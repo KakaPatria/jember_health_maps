@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
+import 'dart:math' as math;
 import 'package:url_launcher/url_launcher.dart';
 import '../models/faskes.dart';
 import '../providers/app_provider.dart';
@@ -97,10 +98,13 @@ class _MapsScreenState extends State<MapsScreen> {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 3),
                 ),
-                child: const Icon(
-                  Icons.navigation,
-                  color: Colors.white,
-                  size: 22,
+                child: Transform.rotate(
+                  angle: (provider.userPosition?.heading ?? 0.0) * math.pi / 180,
+                  child: const Icon(
+                    Icons.navigation,
+                    color: Colors.white,
+                    size: 22,
+                  ),
                 ),
               ),
             ),
@@ -141,7 +145,6 @@ class _MapsScreenState extends State<MapsScreen> {
                   interactionOptions: const InteractionOptions(
                     flags: InteractiveFlag.all,
                   ),
-                  onTap: (_, _) => provider.clearRoute(),
                   onLongPress: (_, latLng) {
                     provider.setUserLocationManually(latLng);
                     ScaffoldMessenger.of(context).clearSnackBars();
@@ -166,6 +169,14 @@ class _MapsScreenState extends State<MapsScreen> {
                   if (provider.routePoints.isNotEmpty)
                     PolylineLayer(
                       polylines: [
+                        // Rute Alternatif (Abu-abu), di belakang
+                        for (int i = 0; i < provider.allRouteOptions.length; i++)
+                          if (i != provider.selectedRouteIndex)
+                            Polyline(
+                              points: provider.allRouteOptions[i].points,
+                              color: Colors.grey.withValues(alpha: 0.7),
+                              strokeWidth: 4,
+                            ),
                         // Garis putus-putus dari lokasi pengguna ke titik awal jalan
                         if (provider.userLatLng != null)
                           Polyline(
@@ -174,7 +185,7 @@ class _MapsScreenState extends State<MapsScreen> {
                             strokeWidth: 4,
                             pattern: StrokePattern.dashed(segments: const [10, 10]),
                           ),
-                        // Garis solid untuk rute
+                        // Garis solid untuk rute utama (Hijau/Primary)
                         Polyline(
                           points: provider.routePoints,
                           color: colors.primary,
@@ -194,6 +205,52 @@ class _MapsScreenState extends State<MapsScreen> {
                   // All markers
                   MarkerLayer(markers: markers),
                 ],
+              ),
+
+              // Compass (selalu tampil)
+              Positioned(
+                bottom: 100,
+                right: 16,
+                child: StreamBuilder<MapEvent>(
+                  stream: _mapController.mapEventStream,
+                  builder: (context, snapshot) {
+                    // camera might not be accessible during build if not initialized properly, but _mapController.camera.rotation is safe here
+                    double rotation = 0.0;
+                    try {
+                      rotation = _mapController.camera.rotation;
+                    } catch (_) {}
+                    
+                    return GestureDetector(
+                      onTap: () {
+                        _mapController.rotate(0.0);
+                      },
+                      child: Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: const [
+                            BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2))
+                          ],
+                        ),
+                        child: Transform.rotate(
+                          angle: -rotation * math.pi / 180,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: const [
+                              Positioned(top: 2, child: Text('U', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.red))),
+                              Positioned(bottom: 2, child: Text('S', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blueGrey))),
+                              Positioned(right: 4, child: Text('T', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blueGrey))),
+                              Positioned(left: 4, child: Text('B', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blueGrey))),
+                              Icon(Icons.arrow_drop_up_rounded, color: Colors.red, size: 36),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
 
               // Route info card
@@ -225,9 +282,21 @@ class _MapsScreenState extends State<MapsScreen> {
                                   ),
                                 ),
                                 Text(
-                                  'Estimasi: ${Haversine.estimasiWaktu(provider.routeDistanceKm)}',
-                                  style: theme.textTheme.bodySmall,
+                                  provider.routeDurationMinutes > 0
+                                      ? 'Estimasi: ${provider.routeDurationMinutes.ceil()} menit'
+                                      : 'Estimasi: ${Haversine.estimasiWaktu(provider.routeDistanceKm)}',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.green.shade700,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
+                                if (provider.allRouteOptions.length > 1)
+                                  Text(
+                                    'Pilih Rute di bawah ini:',
+                                    style: theme.textTheme.labelSmall?.copyWith(
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
@@ -239,7 +308,7 @@ class _MapsScreenState extends State<MapsScreen> {
                                 final lat = provider.routeDestination!.latitude;
                                 final lng = provider.routeDestination!.longitude;
                                 final url = Uri.parse('https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=$lat,$lng');
-                                await launchUrl(url, mode: LaunchMode.inAppWebView);
+                                await launchUrl(url, mode: LaunchMode.externalApplication);
                               }
                             },
                           ),
@@ -250,6 +319,44 @@ class _MapsScreenState extends State<MapsScreen> {
                           ),
                         ],
                       ),
+                    ),
+                  ),
+                ),
+
+              // Pilihan Rute (Chips)
+              if (provider.allRouteOptions.length > 1)
+                Positioned(
+                  top: 96,
+                  left: 16,
+                  right: 16,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(provider.allRouteOptions.length, (index) {
+                        final isSelected = provider.selectedRouteIndex == index;
+                        final route = provider.allRouteOptions[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: ChoiceChip(
+                            label: Text(
+                              route.durationMinutes > 0 
+                                ? '${route.durationMinutes.ceil()} mnt'
+                                : Haversine.estimasiWaktu(route.distanceKm),
+                            ),
+                            selected: isSelected,
+                            selectedColor: colors.primary.withValues(alpha: 0.2),
+                            labelStyle: TextStyle(
+                              color: isSelected ? colors.primary : Colors.black87,
+                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                            ),
+                            onSelected: (bool selected) {
+                              if (selected) {
+                                provider.selectRouteOption(index);
+                              }
+                            },
+                          ),
+                        );
+                      }),
                     ),
                   ),
                 ),

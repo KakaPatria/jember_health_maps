@@ -9,6 +9,14 @@ import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/location_service.dart';
 import '../utils/haversine.dart';
+import 'dart:async';
+
+class RouteData {
+  final List<LatLng> points;
+  final double distanceKm;
+  final double durationMinutes;
+  RouteData({required this.points, required this.distanceKm, required this.durationMinutes});
+}
 
 class AppProvider extends ChangeNotifier {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
@@ -56,12 +64,17 @@ class AppProvider extends ChangeNotifier {
   List<Faskes> get nearestFaskes => _nearestFaskes;
 
   // ─── Route State ─────────────────────────────────────────────────────────────
-  List<LatLng> _routePoints = [];
-  List<LatLng> get routePoints => _routePoints;
+  List<RouteData> _allRouteOptions = [];
+  int _selectedRouteIndex = 0;
+  List<RouteData> get allRouteOptions => _allRouteOptions;
+  int get selectedRouteIndex => _selectedRouteIndex;
+
+  List<LatLng> get routePoints => _allRouteOptions.isNotEmpty ? _allRouteOptions[_selectedRouteIndex].points : [];
+  double get routeDistanceKm => _allRouteOptions.isNotEmpty ? _allRouteOptions[_selectedRouteIndex].distanceKm : 0.0;
+  double get routeDurationMinutes => _allRouteOptions.isNotEmpty ? _allRouteOptions[_selectedRouteIndex].durationMinutes : 0.0;
+  
   LatLng? _routeDestination;
   LatLng? get routeDestination => _routeDestination;
-  double _routeDistanceKm = 0.0;
-  double get routeDistanceKm => _routeDistanceKm;
   bool _isLoadingRoute = false;
   bool get isLoadingRoute => _isLoadingRoute;
 
@@ -130,6 +143,7 @@ class AppProvider extends ChangeNotifier {
     await _authService.logout();
     _currentUser = null;
     _mainTabIndex = 0;
+    _positionStreamSubscription?.cancel();
     notifyListeners();
   }
 
@@ -193,16 +207,34 @@ class AppProvider extends ChangeNotifier {
   //  LOCATION
   // ─────────────────────────────────────────────────────────────────────────────
 
+  StreamSubscription<Position>? _positionStreamSubscription;
+
   Future<bool> fetchUserLocation() async {
     final position = await _locationService.getCurrentPosition();
     if (position == null) return false;
+    
     _userPosition = position;
     computeNearestFaskes(filterJenis: _selectedFilter);
     notifyListeners();
+
+    // Start real-time stream
+    _positionStreamSubscription?.cancel();
+    _positionStreamSubscription = Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 2, // update every 2 meters
+      ),
+    ).listen((newPosition) {
+      _userPosition = newPosition;
+      computeNearestFaskes(filterJenis: _selectedFilter);
+      notifyListeners();
+    });
+
     return true;
   }
 
   void setUserLocationManually(LatLng latLng) {
+    _positionStreamSubscription?.cancel(); // Stop real stream if manual
     _userPosition = Position(
       longitude: latLng.longitude,
       latitude: latLng.latitude,
@@ -249,21 +281,29 @@ class AppProvider extends ChangeNotifier {
   //  ROUTING (OSRM)
   // ─────────────────────────────────────────────────────────────────────────────
 
+  void selectRouteOption(int index) {
+    if (index >= 0 && index < _allRouteOptions.length) {
+      _selectedRouteIndex = index;
+      notifyListeners();
+    }
+  }
+
   Future<bool> fetchRoute({
     required LatLng origin,
     required LatLng destination,
   }) async {
     _isLoadingRoute = true;
-    _routePoints = [];
-    _routeDistanceKm = 0.0;
+    _allRouteOptions = [];
+    _selectedRouteIndex = 0;
+    _routeDestination = null;
     notifyListeners();
 
     try {
       final url =
-          'https://router.project-osrm.org/route/v1/foot/'
+          'https://routing.openstreetmap.de/routed-foot/route/v1/driving/'
           '${origin.longitude},${origin.latitude};'
           '${destination.longitude},${destination.latitude}'
-          '?overview=full&geometries=geojson';
+          '?overview=full&geometries=geojson&alternatives=true';
 
       final response = await http
           .get(Uri.parse(url))
@@ -273,35 +313,54 @@ class AppProvider extends ChangeNotifier {
         final data = json.decode(response.body) as Map<String, dynamic>;
         final routes = data['routes'] as List<dynamic>;
         if (routes.isNotEmpty) {
-          final route = routes.first as Map<String, dynamic>;
-          final geometry = route['geometry'] as Map<String, dynamic>;
-          final coordinates = geometry['coordinates'] as List<dynamic>;
-          final distance = (route['distance'] as num).toDouble();
+          // Parse all routes
+          final List<RouteData> options = [];
+          for (var route in routes) {
+            final geometry = route['geometry'] as Map<String, dynamic>;
+            final coordinates = geometry['coordinates'] as List<dynamic>;
+            final List<LatLng> points = coordinates.map<LatLng>((coord) {
+              final c = coord as List<dynamic>;
+              return LatLng((c[1] as num).toDouble(), (c[0] as num).toDouble());
+            }).toList();
+            
+            final distance = (route['distance'] as num).toDouble();
+            final duration = (route['duration'] as num).toDouble(); // seconds
+            
+            options.add(RouteData(
+              points: points,
+              distanceKm: distance / 1000.0,
+              durationMinutes: duration / 60.0,
+            ));
+          }
 
-          final List<LatLng> points = coordinates.map<LatLng>((coord) {
-            final c = coord as List<dynamic>;
-            return LatLng(
-                (c[1] as num).toDouble(), (c[0] as num).toDouble());
-          }).toList();
-
-          _routePoints = points;
+          _allRouteOptions = options;
+          _selectedRouteIndex = 0;
           _routeDestination = destination;
 
-          _routeDistanceKm = distance / 1000.0;
           _isLoadingRoute = false;
           notifyListeners();
           return true;
         }
+      } else {
+        throw Exception('Gagal mendapatkan rute dari OSRM: ${response.statusCode}');
       }
     } catch (_) {
       // fallback: garis lurus
-      _routePoints = [origin, destination];
-      _routeDistanceKm = Haversine.distanceKm(
+      final distKm = Haversine.distanceKm(
         lat1: origin.latitude,
         lon1: origin.longitude,
         lat2: destination.latitude,
         lon2: destination.longitude,
       );
+      _allRouteOptions = [
+        RouteData(
+          points: [origin, destination],
+          distanceKm: distKm,
+          durationMinutes: distKm * 2, // rough estimate
+        )
+      ];
+      _selectedRouteIndex = 0;
+      _routeDestination = destination;
     }
 
     _isLoadingRoute = false;
@@ -310,9 +369,9 @@ class AppProvider extends ChangeNotifier {
   }
 
   void clearRoute() {
-    _routePoints = [];
+    _allRouteOptions = [];
+    _selectedRouteIndex = 0;
     _routeDestination = null;
-    _routeDistanceKm = 0.0;
     notifyListeners();
   }
 }
