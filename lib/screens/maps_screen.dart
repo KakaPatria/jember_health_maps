@@ -142,6 +142,17 @@ class _MapsScreenState extends State<MapsScreen> {
                     flags: InteractiveFlag.all,
                   ),
                   onTap: (_, _) => provider.clearRoute(),
+                  onLongPress: (_, latLng) {
+                    provider.setUserLocationManually(latLng);
+                    ScaffoldMessenger.of(context).clearSnackBars();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Lokasi simulasi manual berhasil diatur!'),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
                 children: [
                   TileLayer(

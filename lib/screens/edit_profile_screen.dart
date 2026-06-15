@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 import '../database/database_helper.dart';
 import '../models/user.dart';
@@ -136,7 +137,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       radius: 48,
                       backgroundColor: colors.primaryContainer,
                       backgroundImage: _profilePicturePath != null
-                          ? FileImage(File(_profilePicturePath!))
+                          ? (kIsWeb
+                              ? NetworkImage(_profilePicturePath!)
+                              : FileImage(File(_profilePicturePath!))) as ImageProvider
                           : null,
                       child: _profilePicturePath == null
                           ? Text(

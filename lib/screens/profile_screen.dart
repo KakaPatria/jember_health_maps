@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../providers/app_provider.dart';
 import 'edit_profile_screen.dart';
 import 'login_screen.dart';
@@ -63,7 +64,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         radius: 48,
                         backgroundColor: colors.primaryContainer,
                         backgroundImage: user.profilePicture != null
-                            ? FileImage(File(user.profilePicture!))
+                            ? (kIsWeb
+                                ? NetworkImage(user.profilePicture!)
+                                : FileImage(File(user.profilePicture!))) as ImageProvider
                             : null,
                         child: user.profilePicture == null
                             ? Text(

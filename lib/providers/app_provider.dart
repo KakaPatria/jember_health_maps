@@ -197,8 +197,26 @@ class AppProvider extends ChangeNotifier {
     final position = await _locationService.getCurrentPosition();
     if (position == null) return false;
     _userPosition = position;
+    computeNearestFaskes(filterJenis: _selectedFilter);
     notifyListeners();
     return true;
+  }
+
+  void setUserLocationManually(LatLng latLng) {
+    _userPosition = Position(
+      longitude: latLng.longitude,
+      latitude: latLng.latitude,
+      timestamp: DateTime.now(),
+      accuracy: 100.0,
+      altitude: 0.0,
+      heading: 0.0,
+      speed: 0.0,
+      speedAccuracy: 0.0,
+      altitudeAccuracy: 0.0,
+      headingAccuracy: 0.0,
+    );
+    computeNearestFaskes(filterJenis: _selectedFilter);
+    notifyListeners();
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
