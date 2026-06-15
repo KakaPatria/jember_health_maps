@@ -195,7 +195,7 @@ class _MapsScreenState extends State<MapsScreen> {
                         ? 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                         : provider.mapTheme == 'satellite'
                             ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                            : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                     subdomains: const ['a', 'b', 'c'],
                     userAgentPackageName: 'com.example.jember_health_maps',
                   ),
