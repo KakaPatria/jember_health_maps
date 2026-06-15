@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/faskes.dart';
 import '../providers/app_provider.dart';
 import '../utils/haversine.dart';
@@ -220,7 +221,20 @@ class _MapsScreenState extends State<MapsScreen> {
                             ),
                           ),
                           IconButton(
+                            icon: const Icon(Icons.streetview_rounded, color: Colors.blue),
+                            tooltip: 'Street View Tujuan',
+                            onPressed: () async {
+                              if (provider.routeDestination != null) {
+                                final lat = provider.routeDestination!.latitude;
+                                final lng = provider.routeDestination!.longitude;
+                                final url = Uri.parse('https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=$lat,$lng');
+                                await launchUrl(url, mode: LaunchMode.inAppWebView);
+                              }
+                            },
+                          ),
+                          IconButton(
                             icon: const Icon(Icons.close),
+                            tooltip: 'Tutup Rute',
                             onPressed: () => provider.clearRoute(),
                           ),
                         ],
@@ -387,6 +401,7 @@ class _FaskesMarkerInfo extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
                     ],
+
                     Row(
                       children: [
                         Expanded(

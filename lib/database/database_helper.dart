@@ -59,6 +59,14 @@ class DatabaseHelper {
         longitude REAL NOT NULL
       )
     ''');
+
+    // Buat akun default agar user tidak perlu register ulang setiap kali restart web browser
+    await db.insert('users', {
+      'nama': 'Kaka Patria',
+      'email': 'kakapatria66@gmail.com',
+      'password': 'kakapatria',
+      'telepon': '08123456789',
+    });
   }
 
   // ==================== USER OPERATIONS ====================

@@ -211,7 +211,7 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                   _InfoItem(
                     icon: Icons.location_on_outlined,
                     label: 'Alamat',
-                    value: faskes.alamatLengkap,
+                    value: faskes.alamatLengkap.replaceAll('', '').replaceAll('\n', ' ').trim(),
                   ),
                   _InfoItem(
                     icon: Icons.map_outlined,

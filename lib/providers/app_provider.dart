@@ -89,6 +89,17 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      // Ensure default user exists for testing
+      final defaultUser = await _dbHelper.getUserByEmail('kakapatria66@gmail.com');
+      if (defaultUser == null) {
+        await _dbHelper.insertUser(User(
+          nama: 'Kaka Patria',
+          email: 'kakapatria66@gmail.com',
+          password: 'kakapatria',
+          telepon: '08123456789',
+        ));
+      }
+
       await _dbHelper.importFaskesFromJson();
       await loadAllFaskes();
       await loadStats();
@@ -118,6 +129,7 @@ class AppProvider extends ChangeNotifier {
   Future<void> logoutUser() async {
     await _authService.logout();
     _currentUser = null;
+    _mainTabIndex = 0;
     notifyListeners();
   }
 
