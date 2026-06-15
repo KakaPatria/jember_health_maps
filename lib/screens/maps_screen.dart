@@ -55,8 +55,8 @@ class _MapsScreenState extends State<MapsScreen> {
     return faskesList.map((f) {
       return Marker(
         point: LatLng(f.latitude, f.longitude),
-        width: 160,
-        height: 90,
+        width: 40,
+        height: 40,
         alignment: Alignment.topCenter,
         child: GestureDetector(
           onTap: () {
@@ -67,47 +67,7 @@ class _MapsScreenState extends State<MapsScreen> {
               builder: (_) => _FaskesMarkerInfo(faskes: f),
             );
           },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (f.telepon.isNotEmpty)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.15),
-                        blurRadius: 8,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                    border: Border.all(color: Theme.of(context).primaryColor.withValues(alpha: 0.5), width: 1),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.phone, size: 12, color: Theme.of(context).primaryColor),
-                      const SizedBox(width: 4),
-                      Flexible(
-                        child: Text(
-                          f.telepon,
-                          style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              const SizedBox(height: 4),
-              FaskesMarkerIcon.getIcon(f.jenis, size: 40),
-            ],
-          ),
+          child: FaskesMarkerIcon.getIcon(f.jenis, size: 40),
         ),
       );
     }).toList();

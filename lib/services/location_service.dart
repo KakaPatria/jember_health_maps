@@ -7,6 +7,8 @@ class LocationService {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
+      // Membuka pengaturan GPS agar user bisa mengaktifkannya
+      await Geolocator.openLocationSettings();
       return false;
     }
 
@@ -19,6 +21,8 @@ class LocationService {
     }
 
     if (permission == LocationPermission.deniedForever) {
+      // Membuka pengaturan aplikasi agar user bisa memberi izin manual
+      await Geolocator.openAppSettings();
       return false;
     }
 
