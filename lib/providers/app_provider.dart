@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' hide Haversine;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../database/database_helper.dart';
 import '../models/faskes.dart';
 import '../models/user.dart';
@@ -37,6 +38,39 @@ class AppProvider extends ChangeNotifier {
   String get selectedFilter => _selectedFilter;
 
   String _searchQuery = '';
+  
+  // ─── Search History ──────────────────────────────────────────────────────────
+  List<String> _searchHistory = [];
+  List<String> get searchHistory => _searchHistory;
+  static const String _historyKey = 'search_history';
+
+  Future<void> loadSearchHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    _searchHistory = prefs.getStringList(_historyKey) ?? [];
+    notifyListeners();
+  }
+
+  Future<void> addSearchHistory(String query) async {
+    final trimQuery = query.trim();
+    if (trimQuery.isEmpty) return;
+    
+    _searchHistory.remove(trimQuery);
+    _searchHistory.insert(0, trimQuery);
+    if (_searchHistory.length > 10) {
+      _searchHistory = _searchHistory.sublist(0, 10);
+    }
+    
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_historyKey, _searchHistory);
+    notifyListeners();
+  }
+
+  Future<void> clearSearchHistory() async {
+    _searchHistory.clear();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_historyKey);
+    notifyListeners();
+  }
 
   // ─── Stats ───────────────────────────────────────────────────────────────────
   int _totalFaskes = 0;
@@ -64,6 +98,16 @@ class AppProvider extends ChangeNotifier {
   List<Faskes> get nearestFaskes => _nearestFaskes;
 
   // ─── Route State ─────────────────────────────────────────────────────────────
+  String _transportMode = 'motor'; // 'jalan_kaki', 'motor', 'mobil'
+  String get transportMode => _transportMode;
+
+  String _mapTheme = 'normal'; // 'normal', 'dark', 'satellite'
+  String get mapTheme => _mapTheme;
+  void setMapTheme(String theme) {
+    _mapTheme = theme;
+    notifyListeners();
+  }
+
   List<RouteData> _allRouteOptions = [];
   int _selectedRouteIndex = 0;
   List<RouteData> get allRouteOptions => _allRouteOptions;
@@ -117,6 +161,7 @@ class AppProvider extends ChangeNotifier {
       await loadAllFaskes();
       await loadStats();
       await loadCurrentUser();
+      await loadSearchHistory();
     } catch (e) {
       _errorMessage = e.toString();
     }
@@ -281,6 +326,16 @@ class AppProvider extends ChangeNotifier {
   //  ROUTING (OSRM)
   // ─────────────────────────────────────────────────────────────────────────────
 
+  void setTransportMode(String mode) {
+    if (_transportMode != mode) {
+      _transportMode = mode;
+      notifyListeners();
+      if (_userPosition != null && _routeDestination != null) {
+        fetchRoute(origin: userLatLng!, destination: _routeDestination!);
+      }
+    }
+  }
+
   void selectRouteOption(int index) {
     if (index >= 0 && index < _allRouteOptions.length) {
       _selectedRouteIndex = index;
@@ -299,8 +354,12 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      String profile = 'routed-bike';
+      if (_transportMode == 'mobil') profile = 'routed-car';
+      if (_transportMode == 'jalan_kaki') profile = 'routed-foot';
+
       final url =
-          'https://routing.openstreetmap.de/routed-foot/route/v1/driving/'
+          'https://routing.openstreetmap.de/$profile/route/v1/driving/'
           '${origin.longitude},${origin.latitude};'
           '${destination.longitude},${destination.latitude}'
           '?overview=full&geometries=geojson&alternatives=true';
@@ -324,12 +383,22 @@ class AppProvider extends ChangeNotifier {
             }).toList();
             
             final distance = (route['distance'] as num).toDouble();
+            final distanceKm = distance / 1000.0;
             final duration = (route['duration'] as num).toDouble(); // seconds
+
+            double realisticDurationMinutes = duration / 60.0;
+            if (_transportMode == 'motor') {
+              realisticDurationMinutes = distanceKm * 2.5; // ~24 km/h
+            } else if (_transportMode == 'mobil') {
+              realisticDurationMinutes = distanceKm * 3.0; // ~20 km/h (macet/lambat)
+            } else if (_transportMode == 'jalan_kaki') {
+              realisticDurationMinutes = duration / 60.0; // OSRM foot duration
+            }
             
             options.add(RouteData(
               points: points,
-              distanceKm: distance / 1000.0,
-              durationMinutes: duration / 60.0,
+              distanceKm: distanceKm,
+              durationMinutes: realisticDurationMinutes,
             ));
           }
 

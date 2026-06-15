@@ -9,6 +9,7 @@ import '../providers/app_provider.dart';
 import '../utils/haversine.dart';
 import '../widgets/faskes_marker_icon.dart';
 import 'faskes_detail_screen.dart';
+import 'faskes_search_delegate.dart';
 
 /// Center of Jember
 const LatLng _jemberCenter = LatLng(-8.1845, 113.6680);
@@ -121,6 +122,37 @@ class _MapsScreenState extends State<MapsScreen> {
             title: const Text('Peta Faskes Jember'),
             centerTitle: true,
             actions: [
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.layers),
+                tooltip: 'Ganti Tema Peta',
+                onSelected: (theme) => provider.setMapTheme(theme),
+                itemBuilder: (context) => [
+                  const PopupMenuItem(value: 'normal', child: Text('🗺️ Peta Normal')),
+                  const PopupMenuItem(value: 'dark', child: Text('🌙 Mode Gelap')),
+                  const PopupMenuItem(value: 'satellite', child: Text('🛰️ Satelit Asli')),
+                ],
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                tooltip: 'Cari Faskes',
+                onPressed: () async {
+                  final result = await showSearch(
+                    context: context,
+                    delegate: FaskesSearchDelegate(provider),
+                  );
+                  if (result != null) {
+                    _mapController.move(LatLng(result.latitude, result.longitude), 16.0);
+                    if (context.mounted) {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (_) => _FaskesMarkerInfo(faskes: result),
+                      );
+                    }
+                  }
+                },
+              ),
               IconButton(
                 icon: const Icon(Icons.my_location),
                 tooltip: 'Lokasi Saya',
@@ -159,8 +191,11 @@ class _MapsScreenState extends State<MapsScreen> {
                 ),
                 children: [
                   TileLayer(
-                    urlTemplate:
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    urlTemplate: provider.mapTheme == 'dark'
+                        ? 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
+                        : provider.mapTheme == 'satellite'
+                            ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+                            : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                     subdomains: const ['a', 'b', 'c'],
                     userAgentPackageName: 'com.example.jember_health_maps',
                   ),
@@ -235,7 +270,7 @@ class _MapsScreenState extends State<MapsScreen> {
                           ],
                         ),
                         child: Transform.rotate(
-                          angle: -rotation * math.pi / 180,
+                          angle: rotation * math.pi / 180,
                           child: Stack(
                             alignment: Alignment.center,
                             children: const [
@@ -253,110 +288,175 @@ class _MapsScreenState extends State<MapsScreen> {
                 ),
               ),
 
-              // Route info card
+              // Premium Route Info Panel
               if (provider.routePoints.isNotEmpty)
                 Positioned(
-                  top: 8,
+                  top: MediaQuery.of(context).padding.top + 16,
                   left: 16,
                   right: 16,
-                  child: Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.15),
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.route, color: Colors.green),
-                          const SizedBox(width: 8),
-                          Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // 1. Vehicle Selector (SegmentedButton)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                          child: SegmentedButton<String>(
+                            segments: const [
+                              ButtonSegment(value: 'jalan_kaki', icon: Icon(Icons.directions_walk, size: 18), label: Text('Jalan')),
+                              ButtonSegment(value: 'motor', icon: Icon(Icons.two_wheeler, size: 18), label: Text('Motor')),
+                              ButtonSegment(value: 'mobil', icon: Icon(Icons.directions_car, size: 18), label: Text('Mobil')),
+                            ],
+                            selected: {provider.transportMode},
+                            onSelectionChanged: (newSelection) {
+                              provider.setTransportMode(newSelection.first);
+                            },
+                            style: SegmentedButton.styleFrom(
+                              selectedForegroundColor: Colors.white,
+                              selectedBackgroundColor: colors.primary,
+                              textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                        
+                        // 2. Route Stats & Actions
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 4, 8, 12),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.green.withValues(alpha: 0.15),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.route, color: Colors.green, size: 24),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Jarak: ${Haversine.formatDistance(provider.routeDistanceKm)}',
+                                      style: theme.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      provider.routeDurationMinutes > 0
+                                          ? 'Estimasi: ${provider.routeDurationMinutes.ceil()} menit'
+                                          : 'Estimasi: ${Haversine.estimasiWaktu(provider.routeDistanceKm)}',
+                                      style: theme.textTheme.bodyMedium?.copyWith(
+                                        color: Colors.green.shade700,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.streetview_rounded, color: Colors.blue),
+                                tooltip: 'Street View',
+                                style: IconButton.styleFrom(backgroundColor: Colors.blue.withValues(alpha: 0.1)),
+                                onPressed: () async {
+                                  if (provider.routeDestination != null) {
+                                    final lat = provider.routeDestination!.latitude;
+                                    final lng = provider.routeDestination!.longitude;
+                                    final url = Uri.parse('https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=$lat,$lng');
+                                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                                  }
+                                },
+                              ),
+                              const SizedBox(width: 4),
+                              IconButton(
+                                icon: const Icon(Icons.close_rounded, color: Colors.redAccent),
+                                tooltip: 'Tutup Rute',
+                                style: IconButton.styleFrom(backgroundColor: Colors.red.withValues(alpha: 0.1)),
+                                onPressed: () => provider.clearRoute(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        
+                        // 3. Alternative Routes (Chips)
+                        if (provider.allRouteOptions.length > 1) ...[
+                          Divider(height: 1, color: Colors.grey.shade200),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade50,
+                              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'Jarak: ${Haversine.formatDistance(provider.routeDistanceKm)}',
-                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                  'Rute Alternatif:',
+                                  style: theme.textTheme.labelMedium?.copyWith(
+                                    color: Colors.grey.shade600,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Text(
-                                  provider.routeDurationMinutes > 0
-                                      ? 'Estimasi: ${provider.routeDurationMinutes.ceil()} menit'
-                                      : 'Estimasi: ${Haversine.estimasiWaktu(provider.routeDistanceKm)}',
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: Colors.green.shade700,
-                                    fontWeight: FontWeight.w600,
+                                const SizedBox(height: 8),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(provider.allRouteOptions.length, (index) {
+                                      final isSelected = provider.selectedRouteIndex == index;
+                                      final route = provider.allRouteOptions[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.only(right: 8.0),
+                                        child: ChoiceChip(
+                                          showCheckmark: false,
+                                          label: Text(
+                                            route.durationMinutes > 0 
+                                              ? '${route.durationMinutes.ceil()} mnt'
+                                              : Haversine.estimasiWaktu(route.distanceKm),
+                                          ),
+                                          selected: isSelected,
+                                          selectedColor: colors.primary,
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(16),
+                                            side: BorderSide(
+                                              color: isSelected ? colors.primary : Colors.grey.shade300,
+                                            ),
+                                          ),
+                                          labelStyle: TextStyle(
+                                            color: isSelected ? Colors.white : Colors.black87,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          onSelected: (bool selected) {
+                                            if (selected) {
+                                              provider.selectRouteOption(index);
+                                            }
+                                          },
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 ),
-                                if (provider.allRouteOptions.length > 1)
-                                  Text(
-                                    'Pilih Rute di bawah ini:',
-                                    style: theme.textTheme.labelSmall?.copyWith(
-                                      color: Colors.grey.shade600,
-                                    ),
-                                  ),
                               ],
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.streetview_rounded, color: Colors.blue),
-                            tooltip: 'Street View Tujuan',
-                            onPressed: () async {
-                              if (provider.routeDestination != null) {
-                                final lat = provider.routeDestination!.latitude;
-                                final lng = provider.routeDestination!.longitude;
-                                final url = Uri.parse('https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=$lat,$lng');
-                                await launchUrl(url, mode: LaunchMode.externalApplication);
-                              }
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.close),
-                            tooltip: 'Tutup Rute',
-                            onPressed: () => provider.clearRoute(),
-                          ),
                         ],
-                      ),
-                    ),
-                  ),
-                ),
-
-              // Pilihan Rute (Chips)
-              if (provider.allRouteOptions.length > 1)
-                Positioned(
-                  top: 96,
-                  left: 16,
-                  right: 16,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(provider.allRouteOptions.length, (index) {
-                        final isSelected = provider.selectedRouteIndex == index;
-                        final route = provider.allRouteOptions[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: ChoiceChip(
-                            label: Text(
-                              route.durationMinutes > 0 
-                                ? '${route.durationMinutes.ceil()} mnt'
-                                : Haversine.estimasiWaktu(route.distanceKm),
-                            ),
-                            selected: isSelected,
-                            selectedColor: colors.primary.withValues(alpha: 0.2),
-                            labelStyle: TextStyle(
-                              color: isSelected ? colors.primary : Colors.black87,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                            ),
-                            onSelected: (bool selected) {
-                              if (selected) {
-                                provider.selectRouteOption(index);
-                              }
-                            },
-                          ),
-                        );
-                      }),
+                      ],
                     ),
                   ),
                 ),
