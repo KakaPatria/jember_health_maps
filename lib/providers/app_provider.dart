@@ -58,6 +58,8 @@ class AppProvider extends ChangeNotifier {
   // ─── Route State ─────────────────────────────────────────────────────────────
   List<LatLng> _routePoints = [];
   List<LatLng> get routePoints => _routePoints;
+  LatLng? _routeDestination;
+  LatLng? get routeDestination => _routeDestination;
   double _routeDistanceKm = 0.0;
   double get routeDistanceKm => _routeDistanceKm;
   bool _isLoadingRoute = false;
@@ -228,7 +230,7 @@ class AppProvider extends ChangeNotifier {
 
     try {
       final url =
-          'https://router.project-osrm.org/route/v1/driving/'
+          'https://router.project-osrm.org/route/v1/foot/'
           '${origin.longitude},${origin.latitude};'
           '${destination.longitude},${destination.latitude}'
           '?overview=full&geometries=geojson';
@@ -246,11 +248,14 @@ class AppProvider extends ChangeNotifier {
           final coordinates = geometry['coordinates'] as List<dynamic>;
           final distance = (route['distance'] as num).toDouble();
 
-          _routePoints = coordinates.map<LatLng>((coord) {
+          final List<LatLng> points = coordinates.map<LatLng>((coord) {
             final c = coord as List<dynamic>;
             return LatLng(
                 (c[1] as num).toDouble(), (c[0] as num).toDouble());
           }).toList();
+
+          _routePoints = points;
+          _routeDestination = destination;
 
           _routeDistanceKm = distance / 1000.0;
           _isLoadingRoute = false;
@@ -276,6 +281,7 @@ class AppProvider extends ChangeNotifier {
 
   void clearRoute() {
     _routePoints = [];
+    _routeDestination = null;
     _routeDistanceKm = 0.0;
     notifyListeners();
   }

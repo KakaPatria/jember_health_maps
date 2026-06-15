@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final user = User(
         nama: _namaController.text.trim(),
         email: _emailController.text.trim().toLowerCase(),
-        password: _passwordController.text,
+        password: _passwordController.text.trim(),
         telepon: _teleponController.text.trim(),
       );
 

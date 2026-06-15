@@ -106,28 +106,7 @@ class _MapsScreenState extends State<MapsScreen> {
           );
         }
 
-        // Route destination marker
-        if (provider.routePoints.length > 1) {
-          markers.add(
-            Marker(
-              point: provider.routePoints.last,
-              width: 40,
-              height: 40,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.red.withAlpha(200),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 3),
-                ),
-                child: const Icon(
-                  Icons.location_on,
-                  color: Colors.white,
-                  size: 22,
-                ),
-              ),
-            ),
-          );
-        }
+        // Route destination marker dihapus karena sudah ada icon Faskes di lokasi tujuan
 
         // Facility markers
         markers.addAll(_buildFaskesMarkers(provider.filteredFaskes, context));
@@ -158,6 +137,9 @@ class _MapsScreenState extends State<MapsScreen> {
                   initialZoom: _defaultZoom,
                   minZoom: 10,
                   maxZoom: 18,
+                  interactionOptions: const InteractionOptions(
+                    flags: InteractiveFlag.all,
+                  ),
                   onTap: (_, _) => provider.clearRoute(),
                 ),
                 children: [
@@ -172,11 +154,28 @@ class _MapsScreenState extends State<MapsScreen> {
                   if (provider.routePoints.isNotEmpty)
                     PolylineLayer(
                       polylines: [
+                        // Garis putus-putus dari lokasi pengguna ke titik awal jalan
+                        if (provider.userLatLng != null)
+                          Polyline(
+                            points: [provider.userLatLng!, provider.routePoints.first],
+                            color: colors.primary.withValues(alpha: 0.6),
+                            strokeWidth: 4,
+                            pattern: StrokePattern.dashed(segments: const [10, 10]),
+                          ),
+                        // Garis solid untuk rute
                         Polyline(
                           points: provider.routePoints,
                           color: colors.primary,
-                          strokeWidth: 4,
+                          strokeWidth: 5,
                         ),
+                        // Garis putus-putus dari titik akhir jalan ke faskes tujuan
+                        if (provider.routeDestination != null)
+                          Polyline(
+                            points: [provider.routePoints.last, provider.routeDestination!],
+                            color: colors.primary.withValues(alpha: 0.6),
+                            strokeWidth: 4,
+                            pattern: StrokePattern.dashed(segments: const [10, 10]),
+                          ),
                       ],
                     ),
 

@@ -97,10 +97,11 @@ class DatabaseHelper {
 
   Future<User?> loginUser(String email, String password) async {
     final db = await database;
+
     final maps = await db.query(
       'users',
       where: 'email = ? AND password = ?',
-      whereArgs: [email, password],
+      whereArgs: [email, password.trim()],
     );
     if (maps.isNotEmpty) {
       return User.fromMap(maps.first);
