@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../providers/app_provider.dart';
 import 'edit_profile_screen.dart';
+import 'about_screen.dart';
 import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -149,6 +150,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 12),
+
+                    // About App button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const AboutScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.info_outline),
+                        label: const Text('Tentang Aplikasi'),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
 
                     // Logout button
                     SizedBox(
