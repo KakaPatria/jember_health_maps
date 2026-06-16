@@ -12,11 +12,25 @@ import '../services/location_service.dart';
 import '../utils/haversine.dart';
 import 'dart:async';
 
+class RouteInstruction {
+  final String text;
+  final double distance;
+  final String modifier;
+  RouteInstruction({required this.text, required this.distance, required this.modifier});
+}
+
 class RouteData {
   final List<LatLng> points;
   final double distanceKm;
   final double durationMinutes;
-  RouteData({required this.points, required this.distanceKm, required this.durationMinutes});
+  final List<RouteInstruction> instructions;
+  
+  RouteData({
+    required this.points, 
+    required this.distanceKm, 
+    required this.durationMinutes,
+    this.instructions = const [],
+  });
 }
 
 class AppProvider extends ChangeNotifier {
@@ -72,6 +86,36 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ─── Favorites ───────────────────────────────────────────────────────────────
+  List<String> _favoriteFaskesIds = [];
+  List<String> get favoriteFaskesIds => _favoriteFaskesIds;
+  static const String _favKey = 'favorite_faskes';
+
+  Future<void> loadFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    _favoriteFaskesIds = prefs.getStringList(_favKey) ?? [];
+    notifyListeners();
+  }
+
+  Future<void> toggleFavorite(Faskes faskes) async {
+    if (faskes.id == null) return;
+    final idStr = faskes.id.toString();
+    if (_favoriteFaskesIds.contains(idStr)) {
+      _favoriteFaskesIds.remove(idStr);
+    } else {
+      _favoriteFaskesIds.add(idStr);
+    }
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_favKey, _favoriteFaskesIds);
+    _applyFilter();
+    notifyListeners();
+  }
+
+  bool isFavorite(Faskes faskes) {
+    if (faskes.id == null) return false;
+    return _favoriteFaskesIds.contains(faskes.id.toString());
+  }
+
   // ─── Stats ───────────────────────────────────────────────────────────────────
   int _totalFaskes = 0;
   int _totalRumahSakit = 0;
@@ -92,6 +136,21 @@ class AppProvider extends ChangeNotifier {
   LatLng? get userLatLng => _userPosition != null
       ? LatLng(_userPosition!.latitude, _userPosition!.longitude)
       : null;
+
+  bool _isFollowMode = false;
+  bool get isFollowMode => _isFollowMode;
+
+  void toggleFollowMode() {
+    _isFollowMode = !_isFollowMode;
+    notifyListeners();
+  }
+
+  void disableFollowMode() {
+    if (_isFollowMode) {
+      _isFollowMode = false;
+      notifyListeners();
+    }
+  }
 
   // ─── Nearest Faskes ─────────────────────────────────────────────────────────
   List<Faskes> _nearestFaskes = [];
@@ -162,6 +221,7 @@ class AppProvider extends ChangeNotifier {
       await loadStats();
       await loadCurrentUser();
       await loadSearchHistory();
+      await loadFavorites();
     } catch (e) {
       _errorMessage = e.toString();
     }
@@ -217,7 +277,9 @@ class AppProvider extends ChangeNotifier {
   void _applyFilter() {
     List<Faskes> result = List.from(_allFaskes);
 
-    if (_selectedFilter != 'Semua') {
+    if (_selectedFilter == 'Favorit') {
+      result = result.where((f) => f.id != null && _favoriteFaskesIds.contains(f.id.toString())).toList();
+    } else if (_selectedFilter != 'Semua') {
       result = result.where((f) => f.jenis == _selectedFilter).toList();
     }
 
@@ -362,7 +424,7 @@ class AppProvider extends ChangeNotifier {
           'https://routing.openstreetmap.de/$profile/route/v1/driving/'
           '${origin.longitude},${origin.latitude};'
           '${destination.longitude},${destination.latitude}'
-          '?overview=full&geometries=geojson&alternatives=true';
+          '?overview=full&geometries=geojson&alternatives=true&steps=true';
 
       final response = await http
           .get(Uri.parse(url))
@@ -395,10 +457,46 @@ class AppProvider extends ChangeNotifier {
               realisticDurationMinutes = duration / 60.0; // OSRM foot duration
             }
             
+            // Parse Turn-by-Turn Instructions
+            final List<RouteInstruction> instructions = [];
+            final legs = route['legs'] as List<dynamic>?;
+            if (legs != null && legs.isNotEmpty) {
+              final steps = legs.first['steps'] as List<dynamic>?;
+              if (steps != null) {
+                for (var step in steps) {
+                  final maneuver = step['maneuver'] as Map<String, dynamic>?;
+                  final stepDist = (step['distance'] as num).toDouble();
+                  final instruction = step['name']?.toString() ?? '';
+                  final type = maneuver?['type']?.toString() ?? '';
+                  final modifier = maneuver?['modifier']?.toString() ?? '';
+                  
+                  String text = '';
+                  if (type == 'depart') {
+                    text = 'Mulai perjalanan';
+                  } else if (type == 'arrive') {
+                    text = 'Tujuan Anda ada di dekat sini';
+                  } else if (instruction.isEmpty) {
+                    text = 'Terus melaju mengikuti jalan utama';
+                  } else if (modifier.contains('left')) {
+                    text = 'Belok Kiri ke $instruction';
+                  } else if (modifier.contains('right')) {
+                    text = 'Belok Kanan ke $instruction';
+                  } else if (type == 'roundabout') {
+                    text = 'Masuk bundaran menuju $instruction';
+                  } else {
+                    text = 'Lurus ke $instruction';
+                  }
+
+                  instructions.add(RouteInstruction(text: text, distance: stepDist, modifier: modifier));
+                }
+              }
+            }
+            
             options.add(RouteData(
               points: points,
               distanceKm: distanceKm,
               durationMinutes: realisticDurationMinutes,
+              instructions: instructions,
             ));
           }
 

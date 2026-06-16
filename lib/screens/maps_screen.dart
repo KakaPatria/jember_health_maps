@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
@@ -76,6 +77,77 @@ class _MapsScreenState extends State<MapsScreen> {
     }).toList();
   }
 
+  void _showRouteInstructions(BuildContext context, AppProvider provider) {
+    if (provider.allRouteOptions.isEmpty) return;
+    final route = provider.allRouteOptions[provider.selectedRouteIndex];
+    if (route.instructions.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Detail langkah tidak tersedia untuk rute ini.')),
+      );
+      return;
+    }
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 12, bottom: 8),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('Langkah Navigasi', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  itemCount: route.instructions.length,
+                  separatorBuilder: (context, index) => Divider(color: Colors.grey.shade200),
+                  itemBuilder: (context, index) {
+                    final inst = route.instructions[index];
+                    IconData iconData = Icons.straight_rounded;
+                    if (inst.modifier.contains('left')) {
+                      iconData = Icons.turn_left_rounded;
+                    } else if (inst.modifier.contains('right')) {
+                      iconData = Icons.turn_right_rounded;
+                    } else if (inst.modifier.contains('uturn')) {
+                      iconData = Icons.u_turn_left_rounded;
+                    }
+
+                    return ListTile(
+                      leading: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(color: Colors.blue.withValues(alpha: 0.1), shape: BoxShape.circle),
+                        child: Icon(iconData, color: Colors.blue),
+                      ),
+                      title: Text(inst.text, style: const TextStyle(fontWeight: FontWeight.w600)),
+                      subtitle: Text('${inst.distance.toStringAsFixed(0)} meter'),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -83,6 +155,15 @@ class _MapsScreenState extends State<MapsScreen> {
 
     return Consumer<AppProvider>(
       builder: (context, provider, _) {
+        // Follow Mode Check
+        if (provider.isFollowMode && provider.userLatLng != null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) {
+              _mapController.move(provider.userLatLng!, 17.0);
+            }
+          });
+        }
+
         // Build all markers in one list
         final List<Marker> markers = [];
 
@@ -154,9 +235,19 @@ class _MapsScreenState extends State<MapsScreen> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.my_location),
-                tooltip: 'Lokasi Saya',
-                onPressed: _centerOnUser,
+                icon: Icon(
+                  provider.isFollowMode ? Icons.navigation_rounded : Icons.my_location_rounded,
+                  color: provider.isFollowMode ? Colors.blue : null,
+                ),
+                tooltip: provider.isFollowMode ? 'Mode Mengikuti Aktif' : 'Lokasi Saya',
+                onPressed: () {
+                  if (provider.isFollowMode) {
+                    provider.disableFollowMode();
+                  } else {
+                    provider.toggleFollowMode();
+                    _centerOnUser();
+                  }
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.refresh),
@@ -172,11 +263,14 @@ class _MapsScreenState extends State<MapsScreen> {
                 options: MapOptions(
                   initialCenter: _jemberCenter,
                   initialZoom: _defaultZoom,
-                  minZoom: 10,
-                  maxZoom: 18,
                   interactionOptions: const InteractionOptions(
-                    flags: InteractiveFlag.all,
+                    flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
                   ),
+                  onPositionChanged: (position, hasGesture) {
+                    if (hasGesture) {
+                      provider.disableFollowMode();
+                    }
+                  },
                   onLongPress: (_, latLng) {
                     provider.setUserLocationManually(latLng);
                     ScaffoldMessenger.of(context).clearSnackBars();
@@ -371,6 +465,15 @@ class _MapsScreenState extends State<MapsScreen> {
                                 ),
                               ),
                               IconButton(
+                                icon: const Icon(Icons.list_alt_rounded, color: Colors.purple),
+                                tooltip: 'Langkah Navigasi',
+                                style: IconButton.styleFrom(backgroundColor: Colors.purple.withValues(alpha: 0.1)),
+                                onPressed: () {
+                                  _showRouteInstructions(context, provider);
+                                },
+                              ),
+                              const SizedBox(width: 4),
+                              IconButton(
                                 icon: const Icon(Icons.streetview_rounded, color: Colors.blue),
                                 tooltip: 'Street View',
                                 style: IconButton.styleFrom(backgroundColor: Colors.blue.withValues(alpha: 0.1)),
@@ -473,11 +576,6 @@ class _MapsScreenState extends State<MapsScreen> {
                 ),
             ],
           ),
-          floatingActionButton: FloatingActionButton.small(
-            onPressed: _centerOnUser,
-            tooltip: 'Pusat ke lokasi saya',
-            child: const Icon(Icons.my_location),
-          ),
         );
       },
     );
@@ -563,6 +661,19 @@ class _FaskesMarkerInfo extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Consumer<AppProvider>(
+                      builder: (context, provider, _) {
+                        final isFav = provider.isFavorite(faskes);
+                        return IconButton(
+                          icon: Icon(
+                            isFav ? Icons.star_rounded : Icons.star_border_rounded,
+                            color: isFav ? Colors.amber : Colors.white,
+                            size: 32,
+                          ),
+                          onPressed: () => provider.toggleFavorite(faskes),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -614,6 +725,16 @@ class _FaskesMarkerInfo extends StatelessWidget {
                               faskes.telepon,
                               style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.copy_rounded, size: 20, color: Colors.grey),
+                            tooltip: 'Salin Nomor',
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(text: faskes.telepon));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Nomor berhasil disalin!')),
+                              );
+                            },
                           ),
                         ],
                       ),

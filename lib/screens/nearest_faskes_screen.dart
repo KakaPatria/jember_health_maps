@@ -53,6 +53,7 @@ class _NearestFaskesScreenState extends State<NearestFaskesScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   children: [
                     'Semua',
+                    'Favorit',
                     'Rumah Sakit',
                     'Puskesmas',
                     'Klinik',

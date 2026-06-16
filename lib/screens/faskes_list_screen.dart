@@ -79,6 +79,7 @@ class _FaskesListScreenState extends State<FaskesListScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     children: [
                       'Semua',
+                      'Favorit',
                       'Rumah Sakit',
                       'Puskesmas',
                       'Klinik',
