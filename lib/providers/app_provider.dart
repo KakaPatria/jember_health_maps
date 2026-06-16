@@ -144,6 +144,33 @@ class AppProvider extends ChangeNotifier {
   double? _compassHeading;
   double? get compassHeading => _compassHeading;
 
+  /// Start the compass sensor stream. Call this once at app startup.
+  /// Works independently of location — no GPS permission needed.
+  void startCompass() {
+    _compassStreamSubscription?.cancel();
+    try {
+      final stream = FlutterCompass.events;
+      if (stream != null) {
+        _compassStreamSubscription = stream.listen(
+          (event) {
+            if (event.heading != null) {
+              _compassHeading = event.heading!;
+              notifyListeners();
+            }
+          },
+          onError: (e) {
+            debugPrint('Compass stream error: $e');
+          },
+        );
+        debugPrint('Compass stream started successfully');
+      } else {
+        debugPrint('Compass not available on this device (stream is null)');
+      }
+    } catch (e) {
+      debugPrint('Failed to start compass: $e');
+    }
+  }
+
   void toggleFollowMode() {
     _isFollowMode = !_isFollowMode;
     notifyListeners();
@@ -341,15 +368,6 @@ class AppProvider extends ChangeNotifier {
       computeNearestFaskes(filterJenis: _selectedFilter);
       notifyListeners();
     });
-
-    // Start compass stream
-    _compassStreamSubscription?.cancel();
-    if (!kIsWeb) {
-      _compassStreamSubscription = FlutterCompass.events?.listen((event) {
-        _compassHeading = event.heading;
-        notifyListeners();
-      });
-    }
 
     return true;
   }

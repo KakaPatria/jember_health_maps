@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'dart:math' as math;
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
 import '../database/database_helper.dart';
@@ -126,8 +125,10 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                                   shape: BoxShape.circle,
                                   border: Border.all(color: Colors.white, width: 3),
                                 ),
-                                child: Transform.rotate(
-                                  angle: ((provider.compassHeading ?? provider.userPosition?.heading ?? 0.0) + mapRot) * math.pi / 180,
+                                child: AnimatedRotation(
+                                  turns: ((provider.compassHeading ?? provider.userPosition?.heading ?? 0.0) + mapRot) / 360.0,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeOut,
                                   child: const Icon(
                                     Icons.navigation,
                                     color: Colors.white,

@@ -35,6 +35,8 @@ class _MapsScreenState extends State<MapsScreen> {
 
   Future<void> _locateUser() async {
     final provider = Provider.of<AppProvider>(context, listen: false);
+    // Start compass sensor immediately (no permission needed)
+    provider.startCompass();
     final success = await provider.fetchUserLocation();
     if (success && mounted && provider.userLatLng != null) {
       _mapController.move(provider.userLatLng!, 13.0);
@@ -186,8 +188,10 @@ class _MapsScreenState extends State<MapsScreen> {
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 3),
                     ),
-                    child: Transform.rotate(
-                      angle: ((provider.compassHeading ?? provider.userPosition?.heading ?? 0.0) + mapRotation) * math.pi / 180,
+                    child: AnimatedRotation(
+                      turns: ((provider.compassHeading ?? provider.userPosition?.heading ?? 0.0) + mapRotation) / 360.0,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
                       child: const Icon(
                         Icons.navigation,
                         color: Colors.white,
