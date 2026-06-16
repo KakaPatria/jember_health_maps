@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
-import 'package:url_launcher/url_launcher.dart';
 import '../models/faskes.dart';
 import '../providers/app_provider.dart';
 import '../utils/haversine.dart';
@@ -470,20 +469,6 @@ class _MapsScreenState extends State<MapsScreen> {
                                 style: IconButton.styleFrom(backgroundColor: Colors.purple.withValues(alpha: 0.1)),
                                 onPressed: () {
                                   _showRouteInstructions(context, provider);
-                                },
-                              ),
-                              const SizedBox(width: 4),
-                              IconButton(
-                                icon: const Icon(Icons.streetview_rounded, color: Colors.blue),
-                                tooltip: 'Street View',
-                                style: IconButton.styleFrom(backgroundColor: Colors.blue.withValues(alpha: 0.1)),
-                                onPressed: () async {
-                                  if (provider.routeDestination != null) {
-                                    final lat = provider.routeDestination!.latitude;
-                                    final lng = provider.routeDestination!.longitude;
-                                    final url = Uri.parse('https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=$lat,$lng');
-                                    await launchUrl(url, mode: LaunchMode.externalApplication);
-                                  }
                                 },
                               ),
                               const SizedBox(width: 4),

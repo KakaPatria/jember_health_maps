@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
@@ -223,6 +224,16 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                       icon: Icons.phone_outlined,
                       label: 'Telepon',
                       value: faskes.telepon,
+                      trailing: IconButton(
+                        icon: const Icon(Icons.copy_rounded, size: 20, color: Colors.grey),
+                        tooltip: 'Salin Nomor',
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(text: faskes.telepon));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Nomor berhasil disalin!')),
+                          );
+                        },
+                      ),
                     ),
                   _InfoItem(
                     icon: Icons.pin_drop_outlined,
@@ -274,11 +285,13 @@ class _InfoItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
+  final Widget? trailing;
 
   const _InfoItem({
     required this.icon,
     required this.label,
     required this.value,
+    this.trailing,
   });
 
   @override
@@ -306,6 +319,7 @@ class _InfoItem extends StatelessWidget {
               ],
             ),
           ),
+          ?trailing,
         ],
       ),
     );

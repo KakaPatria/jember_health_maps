@@ -34,7 +34,7 @@ class JemberHealthMapsApp extends StatelessWidget {
 
   ThemeData _buildLightTheme() {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF00897B), // Teal/hijau kesehatan
+      seedColor: const Color(0xFF1976D2), // Premium Modern Blue
       brightness: Brightness.light,
     );
 
@@ -103,7 +103,7 @@ class JemberHealthMapsApp extends StatelessWidget {
 
   ThemeData _buildDarkTheme() {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF00897B),
+      seedColor: const Color(0xFF1976D2),
       brightness: Brightness.dark,
     );
 
