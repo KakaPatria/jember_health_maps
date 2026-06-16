@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' hide Haversine;
@@ -139,6 +140,9 @@ class AppProvider extends ChangeNotifier {
 
   bool _isFollowMode = false;
   bool get isFollowMode => _isFollowMode;
+
+  double? _compassHeading;
+  double? get compassHeading => _compassHeading;
 
   void toggleFollowMode() {
     _isFollowMode = !_isFollowMode;
@@ -315,6 +319,7 @@ class AppProvider extends ChangeNotifier {
   // ─────────────────────────────────────────────────────────────────────────────
 
   StreamSubscription<Position>? _positionStreamSubscription;
+  StreamSubscription<CompassEvent>? _compassStreamSubscription;
 
   Future<bool> fetchUserLocation() async {
     final position = await _locationService.getCurrentPosition();
@@ -337,11 +342,21 @@ class AppProvider extends ChangeNotifier {
       notifyListeners();
     });
 
+    // Start compass stream
+    _compassStreamSubscription?.cancel();
+    if (!kIsWeb) {
+      _compassStreamSubscription = FlutterCompass.events?.listen((event) {
+        _compassHeading = event.heading;
+        notifyListeners();
+      });
+    }
+
     return true;
   }
 
   void setUserLocationManually(LatLng latLng) {
     _positionStreamSubscription?.cancel(); // Stop real stream if manual
+    _compassStreamSubscription?.cancel();
     _userPosition = Position(
       longitude: latLng.longitude,
       latitude: latLng.latitude,

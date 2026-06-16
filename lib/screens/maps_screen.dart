@@ -173,20 +173,29 @@ class _MapsScreenState extends State<MapsScreen> {
               point: provider.userLatLng!,
               width: 40,
               height: 40,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue.withAlpha(200),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 3),
-                ),
-                child: Transform.rotate(
-                  angle: (provider.userPosition?.heading ?? 0.0) * math.pi / 180,
-                  child: const Icon(
-                    Icons.navigation,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                ),
+              child: StreamBuilder<MapEvent>(
+                stream: _mapController.mapEventStream,
+                builder: (context, _) {
+                  double mapRotation = 0.0;
+                  try {
+                    mapRotation = _mapController.camera.rotation;
+                  } catch (_) {}
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withValues(alpha: 0.8),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 3),
+                    ),
+                    child: Transform.rotate(
+                      angle: ((provider.compassHeading ?? provider.userPosition?.heading ?? 0.0) + mapRotation) * math.pi / 180,
+                      child: const Icon(
+                        Icons.navigation,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           );
@@ -263,7 +272,7 @@ class _MapsScreenState extends State<MapsScreen> {
                   initialCenter: _jemberCenter,
                   initialZoom: _defaultZoom,
                   interactionOptions: const InteractionOptions(
-                    flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                    flags: InteractiveFlag.all,
                   ),
                   onPositionChanged: (position, hasGesture) {
                     if (hasGesture) {

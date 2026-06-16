@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'dart:math' as math;
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:provider/provider.dart';
 import '../database/database_helper.dart';
@@ -20,6 +21,8 @@ class FaskesDetailScreen extends StatefulWidget {
 class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
   Faskes? _faskes;
   bool _isLoading = true;
+
+  final MapController _mapController = MapController();
 
   @override
   void initState() {
@@ -82,6 +85,7 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
               height: 200,
               width: double.infinity,
               child: FlutterMap(
+                mapController: _mapController,
                 options: MapOptions(
                   initialCenter: LatLng(faskes.latitude, faskes.longitude),
                   initialZoom: 15,
@@ -109,17 +113,29 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                           point: provider.userLatLng!,
                           width: 30,
                           height: 30,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.blue.withAlpha(200),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 3),
-                            ),
-                            child: const Icon(
-                              Icons.navigation,
-                              color: Colors.white,
-                              size: 18,
-                            ),
+                          child: StreamBuilder<MapEvent>(
+                            stream: _mapController.mapEventStream,
+                            builder: (context, _) {
+                              double mapRot = 0.0;
+                              try {
+                                mapRot = _mapController.camera.rotation;
+                              } catch (_) {}
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blue.withAlpha(200),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.white, width: 3),
+                                ),
+                                child: Transform.rotate(
+                                  angle: ((provider.compassHeading ?? provider.userPosition?.heading ?? 0.0) + mapRot) * math.pi / 180,
+                                  child: const Icon(
+                                    Icons.navigation,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                     ],
