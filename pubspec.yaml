@@ -25,8 +25,7 @@ dependencies:
   sqflite_common_ffi_web: ^1.1.2
   image_picker: ^1.2.2
   url_launcher: ^6.3.2
-  flutter_compass: ^0.8.1
-
+  sensors_plus: ^7.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -355,14 +355,20 @@ class _MapsScreenState extends State<MapsScreen> {
                 child: StreamBuilder<MapEvent>(
                   stream: _mapController.mapEventStream,
                   builder: (context, snapshot) {
-                    // camera might not be accessible during build if not initialized properly, but _mapController.camera.rotation is safe here
-                    double rotation = 0.0;
+                    double mapRot = 0.0;
                     try {
-                      rotation = _mapController.camera.rotation;
+                      mapRot = _mapController.camera.rotation;
                     } catch (_) {}
                     
+                    // The U B S T widget now acts as a REAL compass.
+                    // It points to the physical North by subtracting the device's compass heading.
+                    // We also account for map rotation so it stays accurate relative to the screen.
+                    final heading = provider.compassHeading ?? 0.0;
+                    final compassAngle = (-heading - mapRot) * math.pi / 180;
+
                     return GestureDetector(
                       onTap: () {
+                        // Reset map rotation on tap
                         _mapController.rotate(0.0);
                       },
                       child: Container(
@@ -376,7 +382,7 @@ class _MapsScreenState extends State<MapsScreen> {
                           ],
                         ),
                         child: Transform.rotate(
-                          angle: rotation * math.pi / 180,
+                          angle: compassAngle,
                           child: Stack(
                             alignment: Alignment.center,
                             children: const [

@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' hide Haversine;
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../database/database_helper.dart';
 import '../models/faskes.dart';
@@ -11,7 +13,6 @@ import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/location_service.dart';
 import '../utils/haversine.dart';
-import 'dart:async';
 
 class RouteInstruction {
   final String text;
@@ -144,31 +145,102 @@ class AppProvider extends ChangeNotifier {
   double? _compassHeading;
   double? get compassHeading => _compassHeading;
 
+  // Raw sensor state for compass computation
+  double _ax = 0, _ay = 0, _az = 9.81;
+  bool _hasAccel = false;
+  StreamSubscription<AccelerometerEvent>? _accelSubscription;
+  StreamSubscription<MagnetometerEvent>? _magnetSubscription;
+
   /// Start the compass sensor stream. Call this once at app startup.
-  /// Works independently of location — no GPS permission needed.
+  /// Uses raw accelerometer + magnetometer data (same algorithm as Android OS).
   void startCompass() {
-    _compassStreamSubscription?.cancel();
+    _accelSubscription?.cancel();
+    _magnetSubscription?.cancel();
+
     try {
-      final stream = FlutterCompass.events;
-      if (stream != null) {
-        _compassStreamSubscription = stream.listen(
-          (event) {
-            if (event.heading != null) {
-              _compassHeading = event.heading!;
-              notifyListeners();
-            }
-          },
-          onError: (e) {
-            debugPrint('Compass stream error: $e');
-          },
-        );
-        debugPrint('Compass stream started successfully');
-      } else {
-        debugPrint('Compass not available on this device (stream is null)');
-      }
+      // Listen to accelerometer (includes gravity)
+      _accelSubscription = accelerometerEventStream(
+        samplingPeriod: SensorInterval.uiInterval,
+      ).listen((event) {
+        // Low-pass filter for stability
+        _ax = _ax * 0.85 + event.x * 0.15;
+        _ay = _ay * 0.85 + event.y * 0.15;
+        _az = _az * 0.85 + event.z * 0.15;
+        _hasAccel = true;
+      }, onError: (e) {
+        debugPrint('Accelerometer error: $e');
+      });
+
+      // Listen to magnetometer — compute heading on each update
+      _magnetSubscription = magnetometerEventStream(
+        samplingPeriod: SensorInterval.uiInterval,
+      ).listen((event) {
+        if (!_hasAccel) return;
+        final heading = _computeHeading(_ax, _ay, _az, event.x, event.y, event.z);
+        if (heading != null) {
+          // Only update if changed by more than 1° to reduce jitter
+          if (_compassHeading == null || (heading - _compassHeading!).abs() > 1.0) {
+            _compassHeading = heading;
+            notifyListeners();
+          }
+        }
+      }, onError: (e) {
+        debugPrint('Magnetometer error: $e');
+      });
+
+      debugPrint('Compass started via sensors_plus (accelerometer + magnetometer)');
     } catch (e) {
-      debugPrint('Failed to start compass: $e');
+      debugPrint('Failed to start compass sensors: $e');
     }
+  }
+
+  /// Compute compass heading from accelerometer + magnetometer.
+  /// Equivalent to Android's SensorManager.getRotationMatrix() + getOrientation().
+  double? _computeHeading(
+    double ax, double ay, double az,
+    double mx, double my, double mz,
+  ) {
+    // Check if gravity is valid (not in free-fall)
+    double normSqA = ax * ax + ay * ay + az * az;
+    if (normSqA < 1.0) return null;
+
+    // H = M × A (East direction in device coordinates)
+    double hx = my * az - mz * ay;
+    double hy = mz * ax - mx * az;
+    double hz = mx * ay - my * ax;
+
+    double normSqH = hx * hx + hy * hy + hz * hz;
+    if (normSqH < 0.01) return null; // magnetic field too weak
+
+    double invH = 1.0 / sqrt(normSqH);
+    hx *= invH; hy *= invH; hz *= invH;
+
+    double invA = 1.0 / sqrt(normSqA);
+    ax *= invA; ay *= invA; az *= invA;
+
+    // M = A × H (North direction in device coordinates)
+    double mx2 = ay * hz - az * hy;
+    double mz2 = ax * hy - ay * hx;
+
+    // Determine azimuth based on phone orientation.
+    // When phone is flat: Y-axis is "forward", use atan2(hy, my2)
+    // When phone is upright: Z-axis is "forward", use atan2(-hz, -mz2)
+    // Blend based on gravity distribution.
+    double absAy = ay.abs();
+    double absAz = az.abs();
+
+    double azimuthRad;
+    if (absAz > absAy) {
+      // Phone is more flat (typical: laying on table, or tilted looking at screen)
+      azimuthRad = atan2(hx, mx2);
+    } else {
+      // Phone is more upright (portrait, held in hand)
+      azimuthRad = atan2(-hz, -mz2);
+    }
+
+    double azimuthDeg = azimuthRad * (180.0 / pi);
+    if (azimuthDeg < 0) azimuthDeg += 360;
+    return azimuthDeg;
   }
 
   void toggleFollowMode() {
@@ -346,7 +418,6 @@ class AppProvider extends ChangeNotifier {
   // ─────────────────────────────────────────────────────────────────────────────
 
   StreamSubscription<Position>? _positionStreamSubscription;
-  StreamSubscription<CompassEvent>? _compassStreamSubscription;
 
   Future<bool> fetchUserLocation() async {
     final position = await _locationService.getCurrentPosition();
@@ -374,7 +445,8 @@ class AppProvider extends ChangeNotifier {
 
   void setUserLocationManually(LatLng latLng) {
     _positionStreamSubscription?.cancel(); // Stop real stream if manual
-    _compassStreamSubscription?.cancel();
+    _accelSubscription?.cancel();
+    _magnetSubscription?.cancel();
     _userPosition = Position(
       longitude: latLng.longitude,
       latitude: latLng.latitude,
