@@ -454,6 +454,10 @@ class AppProvider extends ChangeNotifier {
       headingAccuracy: 0.0,
     );
     computeNearestFaskes(filterJenis: _selectedFilter);
+    if (_routeDestination != null) {
+      // Automatically recalculate the active route using the new simulated location
+      fetchRoute(origin: latLng, destination: _routeDestination!);
+    }
     notifyListeners();
   }
 

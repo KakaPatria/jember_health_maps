@@ -23,7 +23,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 6,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -32,6 +32,13 @@ class DatabaseHelper {
   Future<void> _upgradeDB(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await db.execute('ALTER TABLE users ADD COLUMN profile_picture TEXT');
+    }
+    if (oldVersion < 3) {
+      await db.execute('ALTER TABLE faskes ADD COLUMN jam_buka TEXT');
+    }
+    if (oldVersion < 6) {
+      // Force reload data by clearing the table so importFaskesFromJson will run
+      await db.delete('faskes');
     }
   }
 
@@ -55,6 +62,7 @@ class DatabaseHelper {
         alamat TEXT NOT NULL,
         alamat_lengkap TEXT NOT NULL,
         telepon TEXT NOT NULL,
+        jam_buka TEXT NOT NULL,
         latitude REAL NOT NULL,
         longitude REAL NOT NULL
       )

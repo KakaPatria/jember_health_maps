@@ -6,7 +6,8 @@
     "telepon": "dr. Liliek Farida (0331) 321301",
     "latitude": -8.2051619,
     "longitude": 113.6969662,
-    "alamat_lengkap": "\nJl. Basuki Rahmat No.199, Tumpengsari, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Basuki Rahmat No.199, Tumpengsari, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Mangli",
@@ -15,7 +16,8 @@
     "telepon": "dr. Dian Retno (0331) 487619",
     "latitude": -8.1950451,
     "longitude": 113.6521784,
-    "alamat_lengkap": "\nJl. Otto Iskandardinata No.82, Krajan, Ajung, Kec. Ajung, Kabupaten Jember, Jawa Timur 68175"
+    "alamat_lengkap": "\nJl. Otto Iskandardinata No.82, Krajan, Ajung, Kec. Ajung, Kabupaten Jember, Jawa Timur 68175",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Jember Kidul",
@@ -24,7 +26,8 @@
     "telepon": "dr. Apsari (0331) 424744",
     "latitude": -8.1813889,
     "longitude": 113.6920491,
-    "alamat_lengkap": "\nJl. KH Shiddiq, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. KH Shiddiq, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Patrang",
@@ -33,7 +36,8 @@
     "telepon": "dr. Ninik Widyawati (0331) 484022",
     "latitude": -8.1672693,
     "longitude": 113.68865,
-    "alamat_lengkap": "\nJl. Kaca Piring No.5, Gebang Tengah, Gebang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68117"
+    "alamat_lengkap": "\nJl. Kaca Piring No.5, Gebang Tengah, Gebang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68117",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sumbersari",
@@ -42,7 +46,8 @@
     "telepon": "dr. Hj Edwina P. (0331) 337344",
     "latitude": -8.1787731,
     "longitude": 113.7067081,
-    "alamat_lengkap": "\nJalan Mayjen DI Panjaitan No.42, Lingkungan Sumberdand, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121"
+    "alamat_lengkap": "\nJalan Mayjen DI Panjaitan No.42, Lingkungan Sumberdand, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sukowono",
@@ -51,7 +56,8 @@
     "telepon": "dr. Adi Subagyo (0331) 566168",
     "latitude": -8.0561526,
     "longitude": 113.8287902,
-    "alamat_lengkap": "\nJl. Ahmad Yani, Krajan, Sukowono, Kec. Sukowono, Kabupaten Jember, Jawa Timur 68194"
+    "alamat_lengkap": "\nJl. Ahmad Yani, Krajan, Sukowono, Kec. Sukowono, Kabupaten Jember, Jawa Timur 68194",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sumberjambe",
@@ -60,7 +66,8 @@
     "telepon": "dr. Abd. Rouf (0331) 593712",
     "latitude": -8.1003913,
     "longitude": 113.894588,
-    "alamat_lengkap": "\nJl. Cendrawasih No.2, Krajan, Cumedak, Kec. Sumberjambe, Kabupaten Jember, Jawa Timur 68195"
+    "alamat_lengkap": "\nJl. Cendrawasih No.2, Krajan, Cumedak, Kec. Sumberjambe, Kabupaten Jember, Jawa Timur 68195",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Mayang",
@@ -69,7 +76,8 @@
     "telepon": "dr. Winso Widodo (0331) 591918",
     "latitude": -8.1791161,
     "longitude": 113.7998334,
-    "alamat_lengkap": "\nJl. Pahlawan No.32, Krajan, Tegalwaru, Kec. Mayang, Kabupaten Jember, Jawa Timur 68182"
+    "alamat_lengkap": "\nJl. Pahlawan No.32, Krajan, Tegalwaru, Kec. Mayang, Kabupaten Jember, Jawa Timur 68182",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Mumbulsari",
@@ -78,7 +86,8 @@
     "telepon": "dr. Rukhin Ali (0331) 420326",
     "latitude": -8.257381,
     "longitude": 113.7458975,
-    "alamat_lengkap": "\nPPVW+29R, Jl. Dr. Subandi, Pesi Mangar, Suco, Kec. Mumbulsari, Kabupaten Jember, Jawa Timur 68174"
+    "alamat_lengkap": "\nPPVW+29R, Jl. Dr. Subandi, Pesi Mangar, Suco, Kec. Mumbulsari, Kabupaten Jember, Jawa Timur 68174",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Silo I",
@@ -87,7 +96,8 @@
     "telepon": "dr. Nur Rahman A. (0331) 521169",
     "latitude": -8.2094337,
     "longitude": 113.8644966,
-    "alamat_lengkap": "\nJl. Jend. Ahmad Yani No.154, Krajan, Sumberjati, Kec. Silo, Kabupaten Jember, Jawa Timur 68184"
+    "alamat_lengkap": "\nJl. Jend. Ahmad Yani No.154, Krajan, Sumberjati, Kec. Silo, Kabupaten Jember, Jawa Timur 68184",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Tempurejo",
@@ -96,7 +106,8 @@
     "telepon": "dr.Widiarti (0331) 757924",
     "latitude": -8.298977,
     "longitude": 113.6831761,
-    "alamat_lengkap": "\nJl. KH. Abdul Aziz No.119, Kauman, Kec. Tempurejo, Kabupaten Jember, Jawa Timur 68173"
+    "alamat_lengkap": "\nJl. KH. Abdul Aziz No.119, Kauman, Kec. Tempurejo, Kabupaten Jember, Jawa Timur 68173",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Rambipuji",
@@ -105,7 +116,8 @@
     "telepon": "dr. Moch. Husnan (0331) 711334",
     "latitude": -8.210527,
     "longitude": 113.6044824,
-    "alamat_lengkap": "\nKrajan, Rambipuji, Jember Regency, East Java 68152"
+    "alamat_lengkap": "\nKrajan, Rambipuji, Jember Regency, East Java 68152",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Panti",
@@ -114,7 +126,8 @@
     "telepon": "dr. Hari Basuki (0331) 711700",
     "latitude": -8.1668143,
     "longitude": 113.6260904,
-    "alamat_lengkap": "\nJl. PB. Sudirman No.85, Krajan Selatan, Panti, Kec. Panti, Kabupaten Jember, Jawa Timur 68153"
+    "alamat_lengkap": "\nJl. PB. Sudirman No.85, Krajan Selatan, Panti, Kec. Panti, Kabupaten Jember, Jawa Timur 68153",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sukorambi",
@@ -123,7 +136,8 @@
     "telepon": "dr. Ninik Widyawati (0331) 483966",
     "latitude": -8.158954,
     "longitude": 113.666091,
-    "alamat_lengkap": "\nJl. Mujahir No.2, Krajan, Sukorambi, Kec. Sukorambi, Kabupaten Jember, Jawa Timur 68151"
+    "alamat_lengkap": "\nJl. Mujahir No.2, Krajan, Sukorambi, Kec. Sukorambi, Kabupaten Jember, Jawa Timur 68151",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Jenggawah",
@@ -132,7 +146,8 @@
     "telepon": "dr. Nuri Usmawati (0331) 757880",
     "latitude": -8.2679679,
     "longitude": 113.6489688,
-    "alamat_lengkap": "\nJl. Kawi No.139, Krajan, Jenggawah, Kec. Jenggawah, Kabupaten Jember, Jawa Timur 68171"
+    "alamat_lengkap": "\nJl. Kawi No.139, Krajan, Jenggawah, Kec. Jenggawah, Kabupaten Jember, Jawa Timur 68171",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Ajung",
@@ -141,7 +156,8 @@
     "telepon": "dr. Nining Hariastuti (0331) 757681",
     "latitude": -8.2330611,
     "longitude": 113.6560642,
-    "alamat_lengkap": "\nJl. Curah Kates No.100, Curah Kates, Klompangan, Kec. Ajung, Kabupaten Jember, Jawa Timur 68175"
+    "alamat_lengkap": "\nJl. Curah Kates No.100, Curah Kates, Klompangan, Kec. Ajung, Kabupaten Jember, Jawa Timur 68175",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Tanggul",
@@ -150,7 +166,8 @@
     "telepon": "dr. bambang Witarno (0331) 441048",
     "latitude": -8.1545009,
     "longitude": 113.4359347,
-    "alamat_lengkap": "\nJl. PB.Sudirman No.291, Tekoan, Tanggul Kulon, Kec. Tanggul, Kabupaten Jember, Jawa Timur 68155"
+    "alamat_lengkap": "\nJl. PB.Sudirman No.291, Tekoan, Tanggul Kulon, Kec. Tanggul, Kabupaten Jember, Jawa Timur 68155",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sumberbaru",
@@ -159,7 +176,8 @@
     "telepon": "dr. Imam hadi Susilo (0334) 324018",
     "latitude": -8.1189361,
     "longitude": 113.3934861,
-    "alamat_lengkap": "\nJl. PB.Sudirman No.6, Krajan Lor, Yosorati, Kec. Sumberbaru, Kabupaten Jember, Jawa Timur 68156"
+    "alamat_lengkap": "\nJl. PB.Sudirman No.6, Krajan Lor, Yosorati, Kec. Sumberbaru, Kabupaten Jember, Jawa Timur 68156",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Rowotengah",
@@ -168,7 +186,8 @@
     "telepon": "dr. Megawati (0334) 324540",
     "latitude": -8.1705701,
     "longitude": 113.3851064,
-    "alamat_lengkap": "\nR9HP+Q2H, Jl. Gajahmada, Banjarejo Tengah, Sumberagung, Kec. Sumberbaru, Kabupaten Jember, Jawa Timur 68156"
+    "alamat_lengkap": "\nR9HP+Q2H, Jl. Gajahmada, Banjarejo Tengah, Sumberagung, Kec. Sumberbaru, Kabupaten Jember, Jawa Timur 68156",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Bangsalsari",
@@ -177,7 +196,8 @@
     "telepon": "dr. Koesharyudyarto (0331) 712869",
     "latitude": -8.2005422,
     "longitude": 113.5282676,
-    "alamat_lengkap": "\nJl. Jenderal Ahmad Yani No.3, Krajan B, Bangsalsari, Kec. Bangsalsari, Kabupaten Jember, Jawa Timur 68154"
+    "alamat_lengkap": "\nJl. Jenderal Ahmad Yani No.3, Krajan B, Bangsalsari, Kec. Bangsalsari, Kabupaten Jember, Jawa Timur 68154",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Semboro",
@@ -186,7 +206,8 @@
     "telepon": "dr. I Y Sugiarto (0336) 442192",
     "latitude": -8.2131893,
     "longitude": 113.4603596,
-    "alamat_lengkap": "\nBabatan, Jl. Pelita No.2, Babatan, Sidomekar, Kec. Semboro, Kabupaten Jember, Jawa Timur 68157"
+    "alamat_lengkap": "\nBabatan, Jl. Pelita No.2, Babatan, Sidomekar, Kec. Semboro, Kabupaten Jember, Jawa Timur 68157",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Kencong",
@@ -195,7 +216,8 @@
     "telepon": "dr. Iswarno (0336) 321145",
     "latitude": -8.2835339,
     "longitude": 113.3807359,
-    "alamat_lengkap": "\nJl. R.A. Kartini No.216, Samsari, Wonorejo, Kec. Kencong, Kabupaten Jember, Jawa Timur 68167"
+    "alamat_lengkap": "\nJl. R.A. Kartini No.216, Samsari, Wonorejo, Kec. Kencong, Kabupaten Jember, Jawa Timur 68167",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Gumukmas",
@@ -204,7 +226,8 @@
     "telepon": "dr. Hj Erlina Hadi (0336) 322384",
     "latitude": -8.318036,
     "longitude": 113.4167674,
-    "alamat_lengkap": "\nJl. Raya Puger No.23, Krajan, Menampu, Kec. Gumukmas, Kabupaten Jember, Jawa Timur 68164"
+    "alamat_lengkap": "\nJl. Raya Puger No.23, Krajan, Menampu, Kec. Gumukmas, Kabupaten Jember, Jawa Timur 68164",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Umbulsari",
@@ -213,7 +236,8 @@
     "telepon": "dr. Tegoeh Wibowo (0336) 322550",
     "latitude": -8.260117,
     "longitude": 113.4485909,
-    "alamat_lengkap": "\nJl. Kh. Agus Salim, Krajan, Umbulsari, Kec. Umbulsari, Kabupaten Jember, Jawa Timur 68166"
+    "alamat_lengkap": "\nJl. Kh. Agus Salim, Krajan, Umbulsari, Kec. Umbulsari, Kabupaten Jember, Jawa Timur 68166",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Puger",
@@ -222,7 +246,8 @@
     "telepon": "dr. Santoso Gunawan (0336) 722141",
     "latitude": -8.3596193,
     "longitude": 113.4715125,
-    "alamat_lengkap": "\nKrajan I, Puger Kulon, Puger, Jember Regency, East Java 68164"
+    "alamat_lengkap": "\nKrajan I, Puger Kulon, Puger, Jember Regency, East Java 68164",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Wuluhan",
@@ -231,7 +256,8 @@
     "telepon": "dr. H. Sunaryo (0336) 621163",
     "latitude": -8.3378832,
     "longitude": 113.5522662,
-    "alamat_lengkap": "\nJl. Kartini No.4, Purwojari, Dukuh Dempok, Kec. Wuluhan, Kabupaten Jember, Jawa Timur 68162"
+    "alamat_lengkap": "\nJl. Kartini No.4, Purwojari, Dukuh Dempok, Kec. Wuluhan, Kabupaten Jember, Jawa Timur 68162",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Ambulu",
@@ -240,7 +266,8 @@
     "telepon": "dr. Swinasis (0336) 881078",
     "latitude": -8.348291,
     "longitude": 113.6082388,
-    "alamat_lengkap": "\nMJ25+M7Q, Jl. Ahmad Yani No., Ambulu, Jember, Jawa Timur, Krajan, Ambulu, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172"
+    "alamat_lengkap": "\nMJ25+M7Q, Jl. Ahmad Yani No., Ambulu, Jember, Jawa Timur, Krajan, Ambulu, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Karangduren",
@@ -249,7 +276,8 @@
     "telepon": "dr. Ina Rusdiana (0336) 624088",
     "latitude": -8.2701282,
     "longitude": 113.4903711,
-    "alamat_lengkap": "\nJl. Raya Gambirono, Krajan II, Karangduren, Kec. Balung, Kabupaten Jember, Jawa Timur 68161"
+    "alamat_lengkap": "\nJl. Raya Gambirono, Krajan II, Karangduren, Kec. Balung, Kabupaten Jember, Jawa Timur 68161",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Gladak Pakem",
@@ -258,16 +286,8 @@
     "telepon": "dr. Ratnawati (0331) 337772",
     "latitude": -8.2101245,
     "longitude": 113.6956839,
-    "alamat_lengkap": "\nJl. Wolter Monginsidi No.25, Sumber Salak, Kranjingan, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68126"
-  },
-  {
-    "nama": "PKM Arjasa",
-    "jenis": "Puskesmas",
-    "alamat": "Jl. Bondowoso Candijati Arjasa",
-    "telepon": "dr. H.Aris Trijoko (0331) 541160",
-    "latitude": -8.0957312,
-    "longitude": 113.7554269,
-    "alamat_lengkap": "\nJl. Diponegoro, Krajan Barat, Candijati, Kec. Arjasa, Kabupaten Jember, Jawa Timur 68191"
+    "alamat_lengkap": "\nJl. Wolter Monginsidi No.25, Sumber Salak, Kranjingan, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68126",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Pakusari",
@@ -276,7 +296,8 @@
     "telepon": "dr. Ratnawati (0331) 334010",
     "latitude": -8.1772404,
     "longitude": 113.7783992,
-    "alamat_lengkap": "\nJl. PB. Sudirman No.87, Rowo, Pakusari, Kec. Pakusari, Kabupaten Jember, Jawa Timur 68181"
+    "alamat_lengkap": "\nJl. PB. Sudirman No.87, Rowo, Pakusari, Kec. Pakusari, Kabupaten Jember, Jawa Timur 68181",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Jelbuk",
@@ -285,7 +306,8 @@
     "telepon": "dr. Adi Subagyo (0331) 542971",
     "latitude": -8.0804113,
     "longitude": 113.7600844,
-    "alamat_lengkap": "\nWQ96+R2P, Jl. RA Kartini, Krajan Barat, Jelbuk, Kec. Jelbuk, Kabupaten Jember, Jawa Timur 68192"
+    "alamat_lengkap": "\nWQ96+R2P, Jl. RA Kartini, Krajan Barat, Jelbuk, Kec. Jelbuk, Kabupaten Jember, Jawa Timur 68192",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Kalisat",
@@ -294,7 +316,8 @@
     "telepon": "dr. Rita Wahyuningsih (0331) 593096",
     "latitude": -8.1283845,
     "longitude": 113.8119053,
-    "alamat_lengkap": "\nJalan M.Arifin No.3, Krajan II, Kalisat, Kec. Kalisat, Kabupaten Jember, Jawa Timur 68193"
+    "alamat_lengkap": "\nJalan M.Arifin No.3, Krajan II, Kalisat, Kec. Kalisat, Kabupaten Jember, Jawa Timur 68193",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Ledokombo",
@@ -303,7 +326,8 @@
     "telepon": "dr. Rita Wahyuningsih (0331) 591474",
     "latitude": -8.1349493,
     "longitude": 113.8732446,
-    "alamat_lengkap": "\nPasar, Ledokombo, Jember Regency, East Java 68196"
+    "alamat_lengkap": "\nPasar, Ledokombo, Jember Regency, East Java 68196",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Silo II",
@@ -312,7 +336,8 @@
     "telepon": "dr. Adi Wijaya (0331) 521404",
     "latitude": -8.2317778,
     "longitude": 113.8505968,
-    "alamat_lengkap": "\nPertelon, Jalan Silo Sanen No.72, Pak Telon, Silo, Kec. Silo, Kabupaten Jember, Jawa Timur 68184"
+    "alamat_lengkap": "\nPertelon, Jalan Silo Sanen No.72, Pak Telon, Silo, Kec. Silo, Kabupaten Jember, Jawa Timur 68184",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Curahnongko",
@@ -321,7 +346,8 @@
     "telepon": "dr. Widiarti (0331) 880007",
     "latitude": -8.397056,
     "longitude": 113.7326092,
-    "alamat_lengkap": "\nJl. Bandealit No.19, Curahnongko, Kec. Tempurejo, Kabupaten Jember, Jawa Timur 68172"
+    "alamat_lengkap": "\nJl. Bandealit No.19, Curahnongko, Kec. Tempurejo, Kabupaten Jember, Jawa Timur 68172",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Nogosari",
@@ -330,7 +356,8 @@
     "telepon": "dr. Moch. Husnan   (0331) 7799884",
     "latitude": -8.2600786,
     "longitude": 113.5696122,
-    "alamat_lengkap": "\nUnnamed Rd, Limo, Nogosari, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152"
+    "alamat_lengkap": "\nUnnamed Rd, Limo, Nogosari, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Kemuningsari",
@@ -339,7 +366,8 @@
     "telepon": "dr. Nur Falakhis (0331) 758271",
     "latitude": -8.2907485,
     "longitude": 113.6141279,
-    "alamat_lengkap": "\nJalan Ambulu, Krajan Utara, Kertonegoro, Kec. Jenggawah, Kabupaten Jember, Jawa Timur 68162"
+    "alamat_lengkap": "\nJalan Ambulu, Krajan Utara, Kertonegoro, Kec. Jenggawah, Kabupaten Jember, Jawa Timur 68162",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Klatakan",
@@ -348,7 +376,8 @@
     "telepon": "dr. Titis SW. (0331) 444145",
     "latitude": -8.1875794,
     "longitude": 113.489368,
-    "alamat_lengkap": "\nJalan Raya No.6, Krajan, Klatakan, Tanggul, Jember Regency, East Java 68155"
+    "alamat_lengkap": "\nJalan Raya No.6, Krajan, Klatakan, Tanggul, Jember Regency, East Java 68155",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sukorejo",
@@ -357,7 +386,8 @@
     "telepon": "dr. Henny W. (0331) 713596",
     "latitude": -8.2236434,
     "longitude": 113.5296092,
-    "alamat_lengkap": "\nJl. Balung No.91, Krajan, Sukorejo, Kec. Bangsalsari, Kabupaten Jember, Jawa Timur 68154"
+    "alamat_lengkap": "\nJl. Balung No.91, Krajan, Sukorejo, Kec. Bangsalsari, Kabupaten Jember, Jawa Timur 68154",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Cakru",
@@ -366,7 +396,8 @@
     "telepon": "dr. Isty R. (0336) 323337",
     "latitude": -8.2859947,
     "longitude": 113.3360339,
-    "alamat_lengkap": "\nJl. Diponegoro No.3, Kec. Kencong, Krajan, Cakru, Kencong, Jember Regency, East Java 68167"
+    "alamat_lengkap": "\nJl. Diponegoro No.3, Kec. Kencong, Krajan, Cakru, Kencong, Jember Regency, East Java 68167",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Tembokrejo",
@@ -375,7 +406,8 @@
     "telepon": "dr. Wike W. (0336) 323104",
     "latitude": -8.2756388,
     "longitude": 113.4313629,
-    "alamat_lengkap": "\nJl. PB Sudirman, Kebonsari, Tembokrejo, Kec. Gumukmas, Kabupaten Jember, Jawa Timur 68165"
+    "alamat_lengkap": "\nJl. PB Sudirman, Kebonsari, Tembokrejo, Kec. Gumukmas, Kabupaten Jember, Jawa Timur 68165",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Paleran",
@@ -384,16 +416,8 @@
     "telepon": "dr. Tegoeh Wibowo (0336) 411763",
     "latitude": -8.2280895,
     "longitude": 113.4908023,
-    "alamat_lengkap": "\nJl. Semboro Paleran No.187, Karang Rejo, Paleran, Kec. Umbulsari, Kabupaten Jember, Jawa Timur 68166"
-  },
-  {
-    "nama": "PKM Kasiyan",
-    "jenis": "Puskesmas",
-    "alamat": "Jl. Simpang 3, Puger",
-    "telepon": "dr. Winny S. (0336) 721118",
-    "latitude": -8.3236465,
-    "longitude": 113.4686113,
-    "alamat_lengkap": "\nJl. Lumajang - Jember, Krajan Timur, Mlokorejo, Kec. Puger, Kabupaten Jember, Jawa Timur 68164"
+    "alamat_lengkap": "\nJl. Semboro Paleran No.187, Karang Rejo, Paleran, Kec. Umbulsari, Kabupaten Jember, Jawa Timur 68166",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Jombang",
@@ -402,7 +426,8 @@
     "telepon": "dr. Iswarno (0336) 323634",
     "latitude": -8.2288504,
     "longitude": 113.3176436,
-    "alamat_lengkap": "\nJalan Kamboja No.7, Krajan II, Padomasan, Kec. Jombang, Kabupaten Jember, Jawa Timur 68168"
+    "alamat_lengkap": "\nJalan Kamboja No.7, Krajan II, Padomasan, Kec. Jombang, Kabupaten Jember, Jawa Timur 68168",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Lojejer",
@@ -411,7 +436,8 @@
     "telepon": "dr. Retno H. (0336) 723614",
     "latitude": -8.3638434,
     "longitude": 113.5020039,
-    "alamat_lengkap": "\nJl. Teuku Umar No.2, Kepel, Lojejer, Kec. Wuluhan, Kabupaten Jember, Jawa Timur 68162"
+    "alamat_lengkap": "\nJl. Teuku Umar No.2, Kepel, Lojejer, Kec. Wuluhan, Kabupaten Jember, Jawa Timur 68162",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Sabrang",
@@ -420,7 +446,8 @@
     "telepon": "dr. yayuk M. (0336) 881734",
     "latitude": -8.3820279,
     "longitude": 113.5969661,
-    "alamat_lengkap": "\nJl. Watu Ulo No.9, Krajan, Sabrang, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172"
+    "alamat_lengkap": "\nJl. Watu Ulo No.9, Krajan, Sabrang, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Andongsari",
@@ -429,7 +456,8 @@
     "telepon": "dr. Multazam (0336) 881789",
     "latitude": -8.3676505,
     "longitude": 113.6522844,
-    "alamat_lengkap": "\nJMJ2+WWM, Karang Templek, Andongsari, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172"
+    "alamat_lengkap": "\nJMJ2+WWM, Karang Templek, Andongsari, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "PKM Balung",
@@ -438,7 +466,8 @@
     "telepon": "dr. Yayak H. (0336) 624441",
     "latitude": -8.2656843,
     "longitude": 113.5431547,
-    "alamat_lengkap": "\nPGMV+P7C, Kebonsari, Balung Lor, Kec. Balung, Kabupaten Jember, Jawa Timur 68161"
+    "alamat_lengkap": "\nPGMV+P7C, Kebonsari, Balung Lor, Kec. Balung, Kabupaten Jember, Jawa Timur 68161",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. BAMBANG WITARNO",
@@ -447,7 +476,8 @@
     "telepon": "08124961326",
     "latitude": -8.1885921,
     "longitude": 113.5467026,
-    "alamat_lengkap": "\nJl. Semeru No.7, Gumuk Segawe, Pancakarya, Kec. Ajung, Kabupaten Jember, Jawa Timur 68175"
+    "alamat_lengkap": "\nJl. Semeru No.7, Gumuk Segawe, Pancakarya, Kec. Ajung, Kabupaten Jember, Jawa Timur 68175",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. RITA WAHYUNINGSIH",
@@ -456,7 +486,8 @@
     "telepon": "08135813003",
     "latitude": -8.1659102,
     "longitude": 113.700114,
-    "alamat_lengkap": "\nJl. Pesona Regency Patrang No.AE 44, Krajan, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111"
+    "alamat_lengkap": "\nJl. Pesona Regency Patrang No.AE 44, Krajan, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. LILIK LAKSMIATI",
@@ -465,7 +496,8 @@
     "telepon": "082141217088",
     "latitude": -8.1488246,
     "longitude": 113.7071225,
-    "alamat_lengkap": "\nJl. DR. Soebandi No.20, Patang Tengah, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111"
+    "alamat_lengkap": "\nJl. DR. Soebandi No.20, Patang Tengah, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. TRIWIRANTO",
@@ -474,7 +506,8 @@
     "telepon": "08123472189",
     "latitude": -8.1835508,
     "longitude": 113.6511997,
-    "alamat_lengkap": "\nJL. Perumahan Jl. Bumi Mangli Permai No.A-07, Krajan, Mangli, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68136"
+    "alamat_lengkap": "\nJL. Perumahan Jl. Bumi Mangli Permai No.A-07, Krajan, Mangli, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68136",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. NURI USMAWATI",
@@ -483,7 +516,8 @@
     "telepon": "08124953349",
     "latitude": -8.2787566,
     "longitude": 113.6398379,
-    "alamat_lengkap": "\nSamping Sukses Tailor, Jl. Kawi No.127, Bringan Lawang, Wonojati, Kec. Jenggawah, Kabupaten Jember, Jawa Timur 68171"
+    "alamat_lengkap": "\nSamping Sukses Tailor, Jl. Kawi No.127, Bringan Lawang, Wonojati, Kec. Jenggawah, Kabupaten Jember, Jawa Timur 68171",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. WIKE WAHYU WIJAYANTI",
@@ -492,7 +526,8 @@
     "telepon": "0336-322420",
     "latitude": -8.1729761,
     "longitude": 113.6821173,
-    "alamat_lengkap": "\nRMH7+MVM, Botosari, Dukuh Mencek, Kec. Sukorambi, Kabupaten Jember, Jawa Timur 68151"
+    "alamat_lengkap": "\nRMH7+MVM, Botosari, Dukuh Mencek, Kec. Sukorambi, Kabupaten Jember, Jawa Timur 68151",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. SUWINASIS",
@@ -501,7 +536,8 @@
     "telepon": "08123488224",
     "latitude": -8.2522753,
     "longitude": 113.6064008,
-    "alamat_lengkap": "\nJl. PB Sudirman No.30, Kp. Using, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68155"
+    "alamat_lengkap": "\nJl. PB Sudirman No.30, Kp. Using, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68155",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. TITIS SULISTYOWATI",
@@ -510,7 +546,8 @@
     "telepon": "08123459774",
     "latitude": -8.2496219,
     "longitude": 113.6417231,
-    "alamat_lengkap": "\nJl. KH Agus Salim No.20, Tegal Besar Kulon, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68132"
+    "alamat_lengkap": "\nJl. KH Agus Salim No.20, Tegal Besar Kulon, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68132",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. SUSILO WARDHANI SOEHADI",
@@ -519,7 +556,8 @@
     "telepon": "08123450230",
     "latitude": -8.2068549,
     "longitude": 113.6096686,
-    "alamat_lengkap": "\nQJV5+7V3, Jl. Kartini, Curahancar, Rambipuji, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152"
+    "alamat_lengkap": "\nQJV5+7V3, Jl. Kartini, Curahancar, Rambipuji, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. YUNI ERMITA DJATMIKO, Mkes",
@@ -528,7 +566,8 @@
     "telepon": "08123536906",
     "latitude": -8.2727763,
     "longitude": 113.5423537,
-    "alamat_lengkap": "\nPGGR+VWQ, Jl. Mawar, Kebonsari, Balung Lor, Kec. Balung, Kabupaten Jember, Jawa Timur 68161"
+    "alamat_lengkap": "\nPGGR+VWQ, Jl. Mawar, Kebonsari, Balung Lor, Kec. Balung, Kabupaten Jember, Jawa Timur 68161",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. AKHMAD MULTAZAM",
@@ -537,7 +576,8 @@
     "telepon": "08565584999",
     "latitude": -8.2152212,
     "longitude": 113.7229951,
-    "alamat_lengkap": "\nLangsepam, Rowo Indah, Ajung, Jember Regency, East Java 68175"
+    "alamat_lengkap": "\nLangsepam, Rowo Indah, Ajung, Jember Regency, East Java 68175",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. MEVIE FITRAH DEWI",
@@ -546,7 +586,8 @@
     "telepon": "08123464717",
     "latitude": -8.1672565,
     "longitude": 113.6888443,
-    "alamat_lengkap": "\nJl. Kaca Piring No.47, Gebang Tengah, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68117"
+    "alamat_lengkap": "\nJl. Kaca Piring No.47, Gebang Tengah, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68117",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. WISNU WIDODO EKA PUTRA",
@@ -555,7 +596,8 @@
     "telepon": "081337575666",
     "latitude": -8.168423,
     "longitude": 113.6952926,
-    "alamat_lengkap": "\nJl. Ahmad Yani No.33/29, Kampungtengah, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Ahmad Yani No.33/29, Kampungtengah, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. IGNATIUS YULI SUGIARTO",
@@ -564,7 +606,8 @@
     "telepon": "08124909787",
     "latitude": -8.2331338,
     "longitude": 113.6394047,
-    "alamat_lengkap": "\nJl. Green Garden Regency, Curahbamban, Tanggul Wetan, Kec. Tanggul, Kabupaten Jember, Jawa Timur 68155"
+    "alamat_lengkap": "\nJl. Green Garden Regency, Curahbamban, Tanggul Wetan, Kec. Tanggul, Kabupaten Jember, Jawa Timur 68155",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. ARIS TRIDJOKO",
@@ -573,7 +616,8 @@
     "telepon": "03317744772",
     "latitude": -8.2520092,
     "longitude": 113.6580934,
-    "alamat_lengkap": "\nJl. Candradimuka No.85, Sumberan, Ambulu, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172"
+    "alamat_lengkap": "\nJl. Candradimuka No.85, Sumberan, Ambulu, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. SUNARYO",
@@ -582,7 +626,8 @@
     "telepon": "081336705877",
     "latitude": -8.2152212,
     "longitude": 113.7204202,
-    "alamat_lengkap": "\nLangsepam, Rowo Indah, Ajung, Jember Regency, East Java 68175"
+    "alamat_lengkap": "\nLangsepam, Rowo Indah, Ajung, Jember Regency, East Java 68175",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "dr. ADI WIDJAJA",
@@ -591,7 +636,8 @@
     "telepon": "081336200818",
     "latitude": -8.1764874,
     "longitude": 113.7731585,
-    "alamat_lengkap": "\nQV92+97V, Pertelon, RT.03/RW.10, Pak Telon, Silo, Kec. Silo, Kabupaten Jember, Jawa Timur 68184"
+    "alamat_lengkap": "\nQV92+97V, Pertelon, RT.03/RW.10, Pak Telon, Silo, Kec. Silo, Kabupaten Jember, Jawa Timur 68184",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. KUSHAYATI KUSUMA WARDANI",
@@ -600,7 +646,8 @@
     "telepon": "08123481191",
     "latitude": -8.1784314,
     "longitude": 113.6774565,
-    "alamat_lengkap": "\nJl. Teratai No.I/15, Kaliwates, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Teratai No.I/15, Kaliwates, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. RULITA AGUSTIN",
@@ -609,7 +656,8 @@
     "telepon": "081559991111",
     "latitude": -8.19151,
     "longitude": 113.7011381,
-    "alamat_lengkap": "\nJl. Teuku Umar No.10, Lingkungan Krajan, Kebonsari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68122"
+    "alamat_lengkap": "\nJl. Teuku Umar No.10, Lingkungan Krajan, Kebonsari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68122",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. WAHYU KATMINI",
@@ -618,7 +666,8 @@
     "telepon": "08124910624",
     "latitude": -8.2356823,
     "longitude": 113.5797962,
-    "alamat_lengkap": "\nJl. Balung Kopi No.72, Balung Kopi, Balung Kidul, Kec. Balung, Kabupaten Jember, Jawa Timur 68161"
+    "alamat_lengkap": "\nJl. Balung Kopi No.72, Balung Kopi, Balung Kidul, Kec. Balung, Kabupaten Jember, Jawa Timur 68161",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. SRI ROHIDAFI",
@@ -627,7 +676,8 @@
     "telepon": "081336712575",
     "latitude": -8.1780728,
     "longitude": 113.7997666,
-    "alamat_lengkap": "\nJl. Pahlawan No.47, Dam Saola, Tegalrejo, Kec. Mayang, Kabupaten Jember, Jawa Timur 68182"
+    "alamat_lengkap": "\nJl. Pahlawan No.47, Dam Saola, Tegalrejo, Kec. Mayang, Kabupaten Jember, Jawa Timur 68182",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. ADE KUSMANINGSIH",
@@ -636,7 +686,8 @@
     "telepon": "082139549267",
     "latitude": -8.0503842,
     "longitude": 113.8297834,
-    "alamat_lengkap": "\nPerumahan Griya, Jl. Khairil Anwar, Ragang, barat, Kec. Sukowono, Kabupaten Jember, Jawa Timur 68194"
+    "alamat_lengkap": "\nPerumahan Griya, Jl. Khairil Anwar, Ragang, barat, Kec. Sukowono, Kabupaten Jember, Jawa Timur 68194",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. ARIE WERDININGSIH",
@@ -645,7 +696,8 @@
     "telepon": "081358062562",
     "latitude": -8.1643193,
     "longitude": 113.4482531,
-    "alamat_lengkap": "\nKrajan, Tanggul Kulon, Tanggul, Jember Regency, East Java"
+    "alamat_lengkap": "\nKrajan, Tanggul Kulon, Tanggul, Jember Regency, East Java",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. SALEM BIN MOHAMMAD BAHANAN",
@@ -654,7 +706,8 @@
     "telepon": "081559805574",
     "latitude": -8.2265453,
     "longitude": 113.5432196,
-    "alamat_lengkap": "\nJl. Diponegoro perum loji No.28, Sidoreno, Kencong, Kec. Kencong, Kabupaten Jember, Jawa Timur 68167"
+    "alamat_lengkap": "\nJl. Diponegoro perum loji No.28, Sidoreno, Kencong, Kec. Kencong, Kabupaten Jember, Jawa Timur 68167",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
     "nama": "drg. FITRI EKA RAHMAFURI",
@@ -663,16 +716,18 @@
     "telepon": "08123484624",
     "latitude": -8.199081,
     "longitude": 113.6438785,
-    "alamat_lengkap": "\nBlk. BI-BJ, Wonosari, Mangli, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nBlk. BI-BJ, Wonosari, Mangli, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00"
   },
   {
-    "nama": "UPT PELAYANAN KESEHATAN UNIVERSITAS JEMBER (UMC)",
+    "nama": "UPT PELAYANAN KESEHATAN UNIVERSITAS JEMBER",
     "jenis": "Klinik",
     "alamat": "Jalan Kalimantan 1/60",
     "telepon": "0331-333527",
     "latitude": -8.1686778,
     "longitude": 113.7186561,
-    "alamat_lengkap": "\nJl. Kalimantan Kampus Bumi No.37, Tegal Boto Lor, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121"
+    "alamat_lengkap": "\nJl. Kalimantan Kampus Bumi No.37, Tegal Boto Lor, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK PRATAMA KALISAT HUSADA",
@@ -681,7 +736,8 @@
     "telepon": "0331-4088544",
     "latitude": -8.1222074,
     "longitude": 113.8057547,
-    "alamat_lengkap": "\nVRH4+486, Jl. Pattimura, Krajan II, Kalisat, Kec. Kalisat, Kabupaten Jember, Jawa Timur 68193"
+    "alamat_lengkap": "\nVRH4+486, Jl. Pattimura, Krajan II, Kalisat, Kec. Kalisat, Kabupaten Jember, Jawa Timur 68193",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK PRATAMA  DOKTERKU TAMAN GADING",
@@ -690,7 +746,8 @@
     "telepon": "0331-3588888",
     "latitude": -8.2009915,
     "longitude": 113.7003221,
-    "alamat_lengkap": "\nJl. Perumahan Taman Gading No.7 Blok A6, Tumpengsari, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68132"
+    "alamat_lengkap": "\nJl. Perumahan Taman Gading No.7 Blok A6, Tumpengsari, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68132",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK HARAPAN BERSAMA",
@@ -699,7 +756,8 @@
     "telepon": "08124921821",
     "latitude": -8.3553182,
     "longitude": 113.6203432,
-    "alamat_lengkap": "\nJJVC+V4G, Langon, langon, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172"
+    "alamat_lengkap": "\nJJVC+V4G, Langon, langon, Kec. Ambulu, Kabupaten Jember, Jawa Timur 68172",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK DOKTERKU BINA SEHAT",
@@ -708,7 +766,8 @@
     "telepon": "0331-429742",
     "latitude": -8.1802703,
     "longitude": 113.6849828,
-    "alamat_lengkap": "\nJl. Jayanegara No.81, Kaliwates Kidul, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Jayanegara No.81, Kaliwates Kidul, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK CAMAR",
@@ -717,7 +776,8 @@
     "telepon": "0331-323833",
     "latitude": -8.1743228,
     "longitude": 113.700824,
-    "alamat_lengkap": "\nJl. Kartini No.33, Tembaan, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Kartini No.33, Tembaan, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK PRATAMA  KIMIA FARMA",
@@ -726,7 +786,8 @@
     "telepon": "0331-489020 / 083847664884",
     "latitude": -8.1734422,
     "longitude": 113.6902343,
-    "alamat_lengkap": "\nJl. Gajah Mada No.103, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Gajah Mada No.103, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK RAWAT INAP DR.M.SUHERMAN UNIVERSITAS MUHAMMADIYAH JEMBER",
@@ -735,7 +796,8 @@
     "telepon": "0331-326091 /085233003383",
     "latitude": -8.1775677,
     "longitude": 113.7169854,
-    "alamat_lengkap": "\nJl. Karimata No.49, Gumuk Kerang, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121"
+    "alamat_lengkap": "\nJl. Karimata No.49, Gumuk Kerang, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "Poli Umum dan Gigi RS IBI",
@@ -744,7 +806,8 @@
     "telepon": "0331-335290 / 0331-7845904",
     "latitude": -8.1858931,
     "longitude": 113.690357,
-    "alamat_lengkap": "\nJl. KH Agus Salim No.20, Tegal Besar Kulon, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68132"
+    "alamat_lengkap": "\nJl. KH Agus Salim No.20, Tegal Besar Kulon, Tegal Besar, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68132",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK YONIF 515 TANGGUL",
@@ -753,7 +816,8 @@
     "telepon": "0336 - 441005",
     "latitude": -8.1577322,
     "longitude": 113.4505683,
-    "alamat_lengkap": "\nKrajan II, Patemon, Tanggul, Jember Regency, East Java 68155"
+    "alamat_lengkap": "\nKrajan II, Patemon, Tanggul, Jember Regency, East Java 68155",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK POSKES 05.10.23 TANGGUL",
@@ -762,7 +826,8 @@
     "telepon": "082139787670",
     "latitude": -8.164016,
     "longitude": 113.4559802,
-    "alamat_lengkap": "\nJl. Kartini No.9, Krajan, Tanggul Wetan, Kec. Tanggul, Kabupaten Jember, Jawa Timur 68155"
+    "alamat_lengkap": "\nJl. Kartini No.9, Krajan, Tanggul Wetan, Kec. Tanggul, Kabupaten Jember, Jawa Timur 68155",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK KESEHATAN YONIF 509",
@@ -771,7 +836,8 @@
     "telepon": "081210002868",
     "latitude": -8.1812381,
     "longitude": 113.7286429,
-    "alamat_lengkap": "\nRP9H+GF2, Kali Oktak, Karangrejo, Sumbersari, Jember Regency, East Java 68124"
+    "alamat_lengkap": "\nRP9H+GF2, Kali Oktak, Karangrejo, Sumbersari, Jember Regency, East Java 68124",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK YON ARMED 8",
@@ -780,7 +846,8 @@
     "telepon": "082330217093",
     "latitude": -8.1896386,
     "longitude": 113.7023764,
-    "alamat_lengkap": "\nRP62+4XR, Lingkungan Sumber Pak, Kebonsari, Sumbersari, Jember Regency, East Java 68122"
+    "alamat_lengkap": "\nRP62+4XR, Lingkungan Sumber Pak, Kebonsari, Sumbersari, Jember Regency, East Java 68122",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK SECABA RINDAM V/BRW",
@@ -789,7 +856,8 @@
     "telepon": "081336007558",
     "latitude": -8.2719668,
     "longitude": 113.5967088,
-    "alamat_lengkap": "\nRP9M+P7V, Karang Baru, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124"
+    "alamat_lengkap": "\nRP9M+P7V, Karang Baru, Karangrejo, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68124",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "KLINIK BRIGIF 9",
@@ -798,7 +866,8 @@
     "telepon": "082330217093",
     "latitude": -8.1500616,
     "longitude": 113.705715,
-    "alamat_lengkap": "\nJl. DR. Soebandi No.105, Kreongan Atas, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68118"
+    "alamat_lengkap": "\nJl. DR. Soebandi No.105, Kreongan Atas, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68118",
+    "jam_buka": "Setiap Hari, 08.00 - 21.00"
   },
   {
     "nama": "RS SOEBANDI",
@@ -807,7 +876,8 @@
     "telepon": "(0331)487441",
     "latitude": -8.1509529,
     "longitude": 113.7154793,
-    "alamat_lengkap": "\nJl. DR. Soebandi No.124, Krajan, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111"
+    "alamat_lengkap": "\nJl. DR. Soebandi No.124, Krajan, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "RS BALUNG",
@@ -816,7 +886,8 @@
     "telepon": "(0336)621595",
     "latitude": -8.2708113,
     "longitude": 113.5397375,
-    "alamat_lengkap": "\nPGHQ+MVH, Jl. Rambipuji, Kebonsari, Balung Lor, Kec. Balung, Kabupaten Jember, Jawa Timur 68161"
+    "alamat_lengkap": "\nPGHQ+MVH, Jl. Rambipuji, Kebonsari, Balung Lor, Kec. Balung, Kabupaten Jember, Jawa Timur 68161",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "RS KALISAT",
@@ -825,7 +896,8 @@
     "telepon": "(0331)591038",
     "latitude": -8.1339427,
     "longitude": 113.8214584,
-    "alamat_lengkap": "\nJl. Mh Tamrin, Dusun Krajan, Ajung, Kec. Kalisat, Kabupaten Jember, Jawa Timur 68193"
+    "alamat_lengkap": "\nJl. Mh Tamrin, Dusun Krajan, Ajung, Kec. Kalisat, Kabupaten Jember, Jawa Timur 68193",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "RS BALADHIKA HUSADA",
@@ -834,7 +906,8 @@
     "telepon": "0331489207",
     "latitude": -8.1639486,
     "longitude": 113.7061723,
-    "alamat_lengkap": "\nJalan Panglima Besar Sudirman No.45, Pagah, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68118"
+    "alamat_lengkap": "\nJalan Panglima Besar Sudirman No.45, Pagah, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68118",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "RS CITRA HUSADA",
@@ -843,7 +916,8 @@
     "telepon": "(0331)486200",
     "latitude": -8.166839,
     "longitude": 113.6806659,
-    "alamat_lengkap": "\nJl. Teratai No.22, Gebang Timur, Gebang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68117"
+    "alamat_lengkap": "\nJl. Teratai No.22, Gebang Timur, Gebang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68117",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "RS BINA SEHAT",
@@ -852,7 +926,8 @@
     "telepon": "(0331)422701",
     "latitude": -8.180509,
     "longitude": 113.6849282,
-    "alamat_lengkap": "\nJl. Jayanegara No.7, Kaliwates Kidul, Kaliwates, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Jayanegara No.7, Kaliwates Kidul, Kaliwates, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "RS PARU",
@@ -861,7 +936,8 @@
     "telepon": "(0331)421078",
     "latitude": -8.1598861,
     "longitude": 113.7055886,
-    "alamat_lengkap": "\nJl. Nusa Indah No.28, Krajan, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68118"
+    "alamat_lengkap": "\nJl. Nusa Indah No.28, Krajan, Jemberlor, Kec. Patrang, Kabupaten Jember, Jawa Timur 68118",
+    "jam_buka": "Buka 24 Jam (IGD)"
   },
   {
     "nama": "PRIMA FARMA",
@@ -870,7 +946,8 @@
     "telepon": "0331-484823",
     "latitude": -8.1572068,
     "longitude": 113.7107523,
-    "alamat_lengkap": "\nJl. DR. Soebandi No.232, Krajan, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111"
+    "alamat_lengkap": "\nJl. DR. Soebandi No.232, Krajan, Patrang, Kec. Patrang, Kabupaten Jember, Jawa Timur 68111",
+    "jam_buka": "Setiap Hari, 07.00 - 22.00"
   },
   {
     "nama": "KIMIA FARMA 62 GAJAH MADA",
@@ -879,7 +956,8 @@
     "telepon": "0331-485424",
     "latitude": -8.1736526,
     "longitude": 113.689612,
-    "alamat_lengkap": "\nJl. Gajah Mada No.171, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68133"
+    "alamat_lengkap": "\nJl. Gajah Mada No.171, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68133",
+    "jam_buka": "Setiap Hari, 07.00 - 22.00"
   },
   {
     "nama": "TRISNO",
@@ -888,7 +966,8 @@
     "telepon": "0331 - 779887",
     "latitude": -8.204026,
     "longitude": 113.6045491,
-    "alamat_lengkap": "\nJl. Sultan Agung No.149, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Sultan Agung No.149, Kelurahan Jember Kidu, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Setiap Hari, 07.00 - 22.00"
   },
   {
     "nama": "Laboratorium Prosenda",
@@ -897,7 +976,8 @@
     "telepon": "0331-332497",
     "latitude": -8.1821011,
     "longitude": 113.7032586,
-    "alamat_lengkap": "\nJl. Letjend Suprapto No.72, Lingkungan Sumberdand, Kebonsari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68122"
+    "alamat_lengkap": "\nJl. Letjend Suprapto No.72, Lingkungan Sumberdand, Kebonsari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68122",
+    "jam_buka": "Senin - Sabtu, 07.00 - 16.00"
   },
   {
     "nama": "ISTANA OPTIK",
@@ -906,7 +986,8 @@
     "telepon": "0331-421067",
     "latitude": -8.171438,
     "longitude": 113.6953335,
-    "alamat_lengkap": "\nJl. Sultan Agung No.182, Kb. Kidul, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Sultan Agung No.182, Kb. Kidul, Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.00 - 16.00"
   },
   {
     "nama": "OPTIK NUSA",
@@ -915,7 +996,8 @@
     "telepon": "0331-323460",
     "latitude": -8.1708808,
     "longitude": 113.7098925,
-    "alamat_lengkap": "\nJl. Sumatra No.129, Tegal Boto Lor, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121"
+    "alamat_lengkap": "\nJl. Sumatra No.129, Tegal Boto Lor, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121",
+    "jam_buka": "Senin - Sabtu, 07.00 - 16.00"
   },
   {
     "nama": "OPTIK MARLIN",
@@ -924,7 +1006,8 @@
     "telepon": "0331-487908 /08155052299",
     "latitude": -8.1706482,
     "longitude": 113.6979074,
-    "alamat_lengkap": "\nJl. Sultan Agung No.85, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Sultan Agung No.85, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.00 - 16.00"
   },
   {
     "nama": "OPTIK INTERNASIONAL",
@@ -933,7 +1016,8 @@
     "telepon": "0331-487204",
     "latitude": -8.1885652,
     "longitude": 113.6454968,
-    "alamat_lengkap": "\nJl. Diponegoro No.A1, Tembaan, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJl. Diponegoro No.A1, Tembaan, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.00 - 16.00"
   },
   {
     "nama": "OPTIK DUTA",
@@ -942,6 +1026,417 @@
     "telepon": "0331-485238/488910",
     "latitude": -8.1752426,
     "longitude": 113.6996539,
-    "alamat_lengkap": "\nJalan Trunojoyo No.80, Jember Kidul, Kaliwates, Tembaan, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131"
+    "alamat_lengkap": "\nJalan Trunojoyo No.80, Jember Kidul, Kaliwates, Tembaan, Kepatihan, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131",
+    "jam_buka": "Senin - Sabtu, 07.00 - 16.00"
+  },
+  {
+    "nama": "Panti Siwi",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan RA. Kartini",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1710106,
+    "longitude": 113.7007694,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Panti Siwi, Jalan RA. Kartini, Jember, Jawa Timur, Jawa, 68137, Indonesia"
+  },
+  {
+    "nama": "Kimia Farma",
+    "jenis": "Apotek",
+    "alamat": "Jalan Letnan Jenderal Suprapto",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1822807,
+    "longitude": 113.7032482,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Kimia Farma, Jalan Letnan Jenderal Suprapto, Kebonsari, Jember, Jawa Timur, 68137, Indonesia"
+  },
+  {
+    "nama": "Apotek Abiath",
+    "jenis": "Apotek",
+    "alamat": "Jalan Kalimantan",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1674988,
+    "longitude": 113.7115248,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Apotek Abiath, Jalan Kalimantan, Jember, Jawa Timur, 68118, Indonesia"
+  },
+  {
+    "nama": "RSU Kaliwates",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Gajah Mada",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1816575,
+    "longitude": 113.6751954,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "RSU Kaliwates, Jalan Gajah Mada, Kaliwates, Jember, Jawa Timur, 68133, Indonesia"
+  },
+  {
+    "nama": "RS DKT",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Panglima Besar Sudirman",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1637027,
+    "longitude": 113.7063287,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "RS DKT, Jalan Panglima Besar Sudirman, Jember, Jawa Timur, Jawa, 68118, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Kalisat",
+    "jenis": "Puskesmas",
+    "alamat": "Jalan Dokter Wahidin",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1283892,
+    "longitude": 113.8118926,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Puskesmas Kalisat, Jalan Dokter Wahidin, Ajung, Jember, Jawa Timur, 68193, Indonesia"
+  },
+  {
+    "nama": "RSD Kalisat",
+    "jenis": "Rumah Sakit",
+    "alamat": "35-041",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1338856,
+    "longitude": 113.8214117,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "RSD Kalisat, 35-041, Ajung, Jember, Jawa Timur, 68193, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Mangli",
+    "jenis": "Puskesmas",
+    "alamat": "Jalan Otto Iskandardinata",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1950712,
+    "longitude": 113.6522109,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Jalan Otto Iskandardinata, Kabupaten Jember"
+  },
+  {
+    "nama": "Puskesmas Jenggawah",
+    "jenis": "Rumah Sakit",
+    "alamat": "35-038",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2679969,
+    "longitude": 113.6489676,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Puskesmas Jenggawah, 35-038, Langsatan, Ajung, Jember, Jawa Timur, 68171, Indonesia"
+  },
+  {
+    "nama": "Apotek Tanjung Sehat",
+    "jenis": "Apotek",
+    "alamat": "Jalan Untung Suropati",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1734935,
+    "longitude": 113.6968717,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Apotek Tanjung Sehat, Jalan Untung Suropati, Jember, Jawa Timur, 68137, Indonesia"
+  },
+  {
+    "nama": "Toko Pertanian Santoso",
+    "jenis": "Apotek",
+    "alamat": "Jalan KH. Samanhudi",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1746055,
+    "longitude": 113.6947718,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Toko Pertanian Santoso, Jalan KH. Samanhudi, Jember, Jawa Timur, 68131, Indonesia"
+  },
+  {
+    "nama": "Apotek Asyfa",
+    "jenis": "Apotek",
+    "alamat": "Jalan Panglima Besar Sudirman",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1624651,
+    "longitude": 113.7074281,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Apotek Asyfa, Jalan Panglima Besar Sudirman, Jember, Jawa Timur, 68118, Indonesia"
+  },
+  {
+    "nama": "RS UTAMA HUSADA",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Manggar",
+    "telepon": "Belum tersedia",
+    "latitude": -8.344341,
+    "longitude": 113.5983649,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "RS UTAMA HUSADA, Jalan Manggar, Tutul, Perumahan Manggar Permai, Jember, Jawa Timur, Indonesia"
+  },
+  {
+    "nama": "Gudang Farmasi Kab. Jember",
+    "jenis": "Apotek",
+    "alamat": "Jl. Ciliwung No. 41",
+    "telepon": "+62 331 487173",
+    "latitude": -8.1691799,
+    "longitude": 113.7040809,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Jl. Ciliwung No. 41, Kabupaten Jember"
+  },
+  {
+    "nama": "Apotek Fajar Baru",
+    "jenis": "Apotek",
+    "alamat": "Jalan Kapten Suwandak No. 44",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1370414,
+    "longitude": 113.2210474,
+    "jam_buka": "08:00 - 13:00",
+    "alamat_lengkap": "Jalan Kapten Suwandak No. 44, Kabupaten Jember"
+  },
+  {
+    "nama": "Dokter Spesialis Kandungan",
+    "jenis": "Klinik",
+    "alamat": "Jalan Raya Balung - Rambipuji",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2738156,
+    "longitude": 113.5370481,
+    "jam_buka": "Setiap Hari, 08.00 - 21.00",
+    "alamat_lengkap": "Dokter Spesialis Kandungan, Jalan Raya Balung - Rambipuji, Rejosari Lor, Gumelar, Jember, Jawa Timur, Jawa, 68161, Indonesia"
+  },
+  {
+    "nama": "Apotek Maulana",
+    "jenis": "Apotek",
+    "alamat": "Jalan Brawijaya",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1906429,
+    "longitude": 113.6506507,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Apotek Maulana, Jalan Brawijaya, Klanceng, Mangli, Jember, Jawa Timur, 68153, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Puger",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jenderal Ahmad Yani",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3595637,
+    "longitude": 113.4715671,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Puskesmas Puger, Jenderal Ahmad Yani, Grenden, Jember, Jawa Timur, 68164, Indonesia"
+  },
+  {
+    "nama": "Siloam Hospitals",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Gajah Mada",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1740895,
+    "longitude": 113.6873968,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Siloam Hospitals, Jalan Gajah Mada, Jember, Jawa Timur, Jawa, 68131, Indonesia"
+  },
+  {
+    "nama": "Apotek Wijaya Ambulu",
+    "jenis": "Apotek",
+    "alamat": "Jalan Manggar",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3463292,
+    "longitude": 113.6048381,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Apotek Wijaya Ambulu, Jalan Manggar, Tutul, Ambulu, Jember, Jawa Timur, Indonesia"
+  },
+  {
+    "nama": "Apotek Aisyah",
+    "jenis": "Apotek",
+    "alamat": "Udang Windu",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1844427,
+    "longitude": 113.6536373,
+    "jam_buka": "Setiap Hari, 07.00 - 22.00",
+    "alamat_lengkap": "Udang Windu, Kabupaten Jember"
+  },
+  {
+    "nama": "Puskesmas Ajung",
+    "jenis": "Rumah Sakit",
+    "alamat": "35-038",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2330366,
+    "longitude": 113.6559588,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Puskesmas Ajung, 35-038, Krasak, Pancakarya, Jember, Jawa Timur, 68153, Indonesia"
+  },
+  {
+    "nama": "Klinik Graha Puger Sehat",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jenderal Ahmad Yani",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3588383,
+    "longitude": 113.4721729,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Klinik Graha Puger Sehat, Jenderal Ahmad Yani, Grenden, Jember, Jawa Timur, 68164, Indonesia"
+  },
+  {
+    "nama": "Apotek Legowo Gumukmas",
+    "jenis": "Apotek",
+    "alamat": "Jalan Sultan Agung",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3156606,
+    "longitude": 113.4175906,
+    "jam_buka": "Mo-Fr 07:00-21:00",
+    "alamat_lengkap": "Apotek Legowo Gumukmas, Jalan Sultan Agung, Purwoasri Krajan, Kebonan, Jember, Jawa Timur, 68165, Indonesia"
+  },
+  {
+    "nama": "dr Dodo",
+    "jenis": "Klinik",
+    "alamat": "Jalan Puger - Gumuk Mas",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3592979,
+    "longitude": 113.4540294,
+    "jam_buka": "Setiap Hari, 08.00 - 21.00",
+    "alamat_lengkap": "dr Dodo, Jalan Puger - Gumuk Mas, Mojosari, Jember, Jawa Timur, 68164, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Karangduren",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Raya Puger-Balung",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2701969,
+    "longitude": 113.4902869,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Puskesmas Karangduren, Jalan Raya Puger-Balung, Kebon, Jambearum, Jember, Jawa Timur, Jawa, 68161, Indonesia"
+  },
+  {
+    "nama": "Klinik PMS",
+    "jenis": "Klinik",
+    "alamat": "Jalan Besini",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3689549,
+    "longitude": 113.4650078,
+    "jam_buka": "Setiap Hari, 08.00 - 21.00",
+    "alamat_lengkap": "Klinik PMS, Jalan Besini, Puger, Jember, Jawa Timur, 68164, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Lojejer",
+    "jenis": "Puskesmas",
+    "alamat": "Jalan Puger-Wuluhan",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3637268,
+    "longitude": 113.5019995,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Puskesmas Lojejer, Jalan Puger-Wuluhan, Lojejer, Jember, Jawa Timur, Jawa, 68164, Indonesia"
+  },
+  {
+    "nama": "RSUD Balung",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Raya Balung - Rambipuji",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2709605,
+    "longitude": 113.539416,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "RSUD Balung, Jalan Raya Balung - Rambipuji, Rejosari Lor, Gumelar, Jember, Jawa Timur, 68161, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Balung",
+    "jenis": "Puskesmas",
+    "alamat": "Jalan Raya Balung - Rambipuji",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2655607,
+    "longitude": 113.5430363,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Puskesmas Balung, Jalan Raya Balung - Rambipuji, Rejosari Lor, Gumelar, Jember, Jawa Timur, 68161, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Kemuningsari Kidul",
+    "jenis": "Rumah Sakit",
+    "alamat": "35-038",
+    "telepon": "Belum tersedia",
+    "latitude": -8.2942713,
+    "longitude": 113.6285103,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Puskesmas Kemuningsari Kidul, 35-038, Langsatan, Ajung, Jember, Jawa Timur, 68171, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Pembantu Menampu",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Gumuk Mas-Puger",
+    "telepon": "Belum tersedia",
+    "latitude": -8.3529361,
+    "longitude": 113.4130989,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Puskesmas Pembantu Menampu, Jalan Gumuk Mas-Puger, Menampu Lor, Menampu, Jember, Jawa Timur, 68165, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Silo II",
+    "jenis": "Rumah Sakit",
+    "alamat": "Pertelon, Jalan Silo Sanen No. 72",
+    "telepon": "+62 33-1521404",
+    "latitude": -8.2317672,
+    "longitude": 113.8506934,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Pertelon, Jalan Silo Sanen No. 72, Kabupaten Jember"
+  },
+  {
+    "nama": "Puskesmas Arjasa",
+    "jenis": "Puskesmas",
+    "alamat": "35-040",
+    "telepon": "Belum tersedia",
+    "latitude": -8.0957198,
+    "longitude": 113.7553858,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Puskesmas Arjasa, 35-040, Patemon, Suko Jember, Jember, Jawa Timur, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Jelbuk",
+    "jenis": "Puskesmas",
+    "alamat": "35-040",
+    "telepon": "Belum tersedia",
+    "latitude": -8.0804602,
+    "longitude": 113.7601463,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Puskesmas Jelbuk, 35-040, Patemon, Suko Jember, Jember, Jawa Timur, Jawa, Indonesia"
+  },
+  {
+    "nama": "Puskesmas Banjar Sengon",
+    "jenis": "Puskesmas",
+    "alamat": "Jalan Kasuari",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1409478,
+    "longitude": 113.6800351,
+    "jam_buka": "Senin - Sabtu, 07.30 - 14.00",
+    "alamat_lengkap": "Puskesmas Banjar Sengon, Jalan Kasuari, Jember, Jawa Timur, 68118, Indonesia"
+  },
+  {
+    "nama": "Dinkes",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Jend. S Parman No. 13",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1337594,
+    "longitude": 113.2236496,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Jalan Jend. S Parman No. 13, Kabupaten Jember"
+  },
+  {
+    "nama": "RS PTP Jember Klinik",
+    "jenis": "Rumah Sakit",
+    "alamat": "Kampung Durenan",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1678717,
+    "longitude": 113.7051734,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "RS PTP Jember Klinik, Kampung Durenan, Jember, Jawa Timur, 68118, Indonesia"
+  },
+  {
+    "nama": "RS Paru Jember",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jl. Nusa Indah No. 28",
+    "telepon": "+62331487255",
+    "latitude": -8.1597852,
+    "longitude": 113.7056703,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Jl. Nusa Indah No. 28, Kabupaten Jember"
+  },
+  {
+    "nama": "RUSD dr. Soebandi Jember",
+    "jenis": "Rumah Sakit",
+    "alamat": "Jalan Dr. Soebandi No.124, Cangkring, Kec Patrang, Kabupaten Jember",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1515611,
+    "longitude": 113.7154502,
+    "jam_buka": "Buka 24 Jam (IGD)",
+    "alamat_lengkap": "Jalan Dr. Soebandi No.124, Cangkring, Kec Patrang, Kabupaten Jember, Kabupaten Jember"
+  },
+  {
+    "nama": "Poliklinik POLIJE",
+    "jenis": "Klinik",
+    "alamat": "164, Jl. Mastrip, Lingkungan Panji, Tegalgede",
+    "telepon": "Belum tersedia",
+    "latitude": -8.1605166,
+    "longitude": 113.7215581,
+    "jam_buka": "Buka - Tutup pukul 16.00",
+    "alamat_lengkap": "164, Jl. Mastrip, Lingkungan Panji, Tegalgede, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121"
   }
 ]

@@ -355,16 +355,14 @@ class _MapsScreenState extends State<MapsScreen> {
                 child: StreamBuilder<MapEvent>(
                   stream: _mapController.mapEventStream,
                   builder: (context, snapshot) {
-                    double mapRot = 0.0;
-                    try {
-                      mapRot = _mapController.camera.rotation;
-                    } catch (_) {}
+                    // The StreamBuilder will just rebuild this widget when map events occur,
+                    // but we don't strictly need mapRot anymore.
                     
                     // The U B S T widget now acts as a REAL compass.
                     // It points to the physical North by subtracting the device's compass heading.
-                    // We also account for map rotation so it stays accurate relative to the screen.
+                    // We remove map rotation from this calculation so it always points to Physical North regardless of map rotation.
                     final heading = provider.compassHeading ?? 0.0;
-                    final compassAngle = (-heading - mapRot) * math.pi / 180;
+                    final compassAngle = (-heading) * math.pi / 180;
 
                     return GestureDetector(
                       onTap: () {
@@ -403,7 +401,7 @@ class _MapsScreenState extends State<MapsScreen> {
               // Premium Route Info Panel
               if (provider.routePoints.isNotEmpty)
                 Positioned(
-                  top: MediaQuery.of(context).padding.top + 16,
+                  top: 12, // Move it higher, just below the AppBar
                   left: 16,
                   right: 16,
                   child: Container(
@@ -739,6 +737,28 @@ class _FaskesMarkerInfo extends StatelessWidget {
                                 const SnackBar(content: Text('Nomor berhasil disalin!')),
                               );
                             },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                    if (faskes.jamBuka.isNotEmpty && faskes.jamBuka != 'Belum tersedia') ...[
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.orange.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Icon(Icons.access_time_rounded, size: 20, color: Colors.orange),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              faskes.jamBuka,
+                              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
