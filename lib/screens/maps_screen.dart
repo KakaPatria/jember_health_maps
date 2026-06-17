@@ -45,6 +45,22 @@ class _MapsScreenState extends State<MapsScreen> {
 
   void _centerOnUser() async {
     final provider = Provider.of<AppProvider>(context, listen: false);
+    
+    // If currently simulating, reset to real GPS first!
+    if (provider.isSimulatedLocation) {
+      await provider.resetToRealLocation();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Kembali ke lokasi GPS asli!'),
+          backgroundColor: Colors.blue,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+
+    if (!mounted) return;
     if (provider.userLatLng != null) {
       _mapController.move(provider.userLatLng!, 15.0);
     } else {
@@ -208,7 +224,39 @@ class _MapsScreenState extends State<MapsScreen> {
         // Route destination marker dihapus karena sudah ada icon Faskes di lokasi tujuan
 
         // Facility markers
-        markers.addAll(_buildFaskesMarkers(provider.filteredFaskes, context));
+        // Facility markers
+        List<Faskes> faskesToDisplay = List.from(provider.filteredFaskes);
+        
+        if (provider.userLatLng != null) {
+          // Sort by actual distance first so the closest ones are at the top of the list!
+          faskesToDisplay.sort((a, b) => (a.distance ?? double.infinity).compareTo(b.distance ?? double.infinity));
+          
+          // Hanya tampilkan faskes yang berjarak <= 7 km dari lokasi user untuk performa dan akurasi "terdekat"
+          faskesToDisplay = faskesToDisplay.where((f) => (f.distance ?? double.infinity) <= 7.0).toList();
+        }
+        
+        // Batasi jumlah maksimal marker di peta (maksimal 20 terdekat)
+        if (faskesToDisplay.length > 20) {
+          faskesToDisplay = faskesToDisplay.take(20).toList();
+        }
+
+        // PENTING: Jika ada rute aktif, pastikan marker tujuan SELALU tampil
+        // meskipun faskes tujuan berada di luar radius 7 km
+        if (provider.routeDestination != null) {
+          final dest = provider.routeDestination!;
+          final alreadyShown = faskesToDisplay.any((f) =>
+              (f.latitude - dest.latitude).abs() < 0.0001 &&
+              (f.longitude - dest.longitude).abs() < 0.0001);
+          if (!alreadyShown) {
+            // Cari faskes tujuan dari allFaskes
+            final destFaskes = provider.allFaskes.where((f) =>
+                (f.latitude - dest.latitude).abs() < 0.0001 &&
+                (f.longitude - dest.longitude).abs() < 0.0001).toList();
+            faskesToDisplay.addAll(destFaskes);
+          }
+        }
+
+        markers.addAll(_buildFaskesMarkers(faskesToDisplay, context));
 
         return Scaffold(
           appBar: AppBar(
@@ -221,7 +269,6 @@ class _MapsScreenState extends State<MapsScreen> {
                 onSelected: (theme) => provider.setMapTheme(theme),
                 itemBuilder: (context) => [
                   const PopupMenuItem(value: 'normal', child: Text('🗺️ Peta Normal')),
-                  const PopupMenuItem(value: 'dark', child: Text('🌙 Mode Gelap')),
                   const PopupMenuItem(value: 'satellite', child: Text('🛰️ Satelit Asli')),
                 ],
               ),
@@ -248,10 +295,22 @@ class _MapsScreenState extends State<MapsScreen> {
               ),
               IconButton(
                 icon: Icon(
-                  provider.isFollowMode ? Icons.navigation_rounded : Icons.my_location_rounded,
-                  color: provider.isFollowMode ? Colors.blue : null,
+                  provider.isFollowMode
+                      ? Icons.navigation_rounded
+                      : provider.isSimulatedLocation
+                          ? Icons.location_disabled_rounded
+                          : Icons.my_location_rounded,
+                  color: provider.isFollowMode
+                      ? Colors.blue
+                      : provider.isSimulatedLocation
+                          ? Colors.red
+                          : null,
                 ),
-                tooltip: provider.isFollowMode ? 'Mode Mengikuti Aktif' : 'Lokasi Saya',
+                tooltip: provider.isFollowMode
+                    ? 'Mode Mengikuti Aktif'
+                    : provider.isSimulatedLocation
+                        ? 'Kembali ke GPS Asli'
+                        : 'Lokasi Saya',
                 onPressed: () {
                   if (provider.isFollowMode) {
                     provider.disableFollowMode();

@@ -55,9 +55,29 @@ class JemberHealthMapsApp extends StatelessWidget {
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        elevation: 2,
-        indicatorColor: colorScheme.secondaryContainer,
+        elevation: 10,
+        backgroundColor: Colors.white,
+        indicatorColor: colorScheme.primaryContainer,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return IconThemeData(color: colorScheme.primary, size: 28);
+          }
+          return IconThemeData(color: Colors.grey.shade500, size: 24);
+        }),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return TextStyle(
+              color: colorScheme.primary,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            );
+          }
+          return TextStyle(
+            color: Colors.grey.shade600,
+            fontSize: 11,
+          );
+        }),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(

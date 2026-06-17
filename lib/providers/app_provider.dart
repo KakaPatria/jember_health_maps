@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' hide Haversine;
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import '../database/database_helper.dart';
 import '../models/faskes.dart';
 import '../models/user.dart';
@@ -39,6 +40,32 @@ class AppProvider extends ChangeNotifier {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
   final AuthService _authService = AuthService();
   final LocationService _locationService = LocationService();
+
+  AppProvider() {
+    _initConnectivity();
+  }
+
+  // ─── Connectivity State ──────────────────────────────────────────────────────
+  bool _hasInternet = true;
+  bool get hasInternet => _hasInternet;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySub;
+
+  Future<void> _initConnectivity() async {
+    final connectivity = Connectivity();
+    final result = await connectivity.checkConnectivity();
+    _hasInternet = !result.contains(ConnectivityResult.none);
+    
+    _connectivitySub = connectivity.onConnectivityChanged.listen((results) {
+      _hasInternet = !results.contains(ConnectivityResult.none);
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    _connectivitySub.cancel();
+    super.dispose();
+  }
 
   // ─── User State ─────────────────────────────────────────────────────────────
   User? _currentUser;
@@ -179,7 +206,7 @@ class AppProvider extends ChangeNotifier {
         final heading = _computeHeading(_ax, _ay, _az, event.x, event.y, event.z);
         if (heading != null) {
           // Only update if changed by more than 1° to reduce jitter
-          if (_compassHeading == null || (heading - _compassHeading!).abs() > 1.0) {
+          if (_compassHeading == null || (heading - _compassHeading!).abs() > 3.0) {
             _compassHeading = heading;
             notifyListeners();
           }
@@ -381,7 +408,12 @@ class AppProvider extends ChangeNotifier {
     }
 
     if (_searchQuery.isNotEmpty) {
-      final q = _searchQuery.toLowerCase();
+      String q = _searchQuery.toLowerCase();
+      // Translate abbreviations
+      q = q.replaceAll(RegExp(r'\bpkm\b'), 'puskesmas');
+      q = q.replaceAll(RegExp(r'\brs\b'), 'rumah sakit');
+      q = q.replaceAll(RegExp(r'\blab\b'), 'laboratorium');
+
       result = result.where((f) {
         return f.nama.toLowerCase().contains(q) ||
             f.jenis.toLowerCase().contains(q) ||
@@ -413,7 +445,11 @@ class AppProvider extends ChangeNotifier {
 
   StreamSubscription<Position>? _positionStreamSubscription;
 
+  bool _isSimulatedLocation = false;
+  bool get isSimulatedLocation => _isSimulatedLocation;
+
   Future<bool> fetchUserLocation() async {
+    _isSimulatedLocation = false;
     final position = await _locationService.getCurrentPosition();
     if (position == null) return false;
     
@@ -426,18 +462,21 @@ class AppProvider extends ChangeNotifier {
     _positionStreamSubscription = Geolocator.getPositionStream(
       locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.high,
-        distanceFilter: 2, // update every 2 meters
+        distanceFilter: 15, // update every 15 meters to save CPU & battery
       ),
     ).listen((newPosition) {
-      _userPosition = newPosition;
-      computeNearestFaskes(filterJenis: _selectedFilter);
-      notifyListeners();
+      if (!_isSimulatedLocation) {
+        _userPosition = newPosition;
+        computeNearestFaskes(filterJenis: _selectedFilter);
+        notifyListeners();
+      }
     });
 
     return true;
   }
 
   void setUserLocationManually(LatLng latLng) {
+    _isSimulatedLocation = true;
     _positionStreamSubscription?.cancel(); // Stop real stream if manual
     _accelSubscription?.cancel();
     _magnetSubscription?.cancel();
@@ -459,6 +498,15 @@ class AppProvider extends ChangeNotifier {
       fetchRoute(origin: latLng, destination: _routeDestination!);
     }
     notifyListeners();
+  }
+
+  Future<void> resetToRealLocation() async {
+    _isSimulatedLocation = false;
+    startCompass();
+    await fetchUserLocation();
+    if (_userPosition != null && _routeDestination != null) {
+      fetchRoute(origin: userLatLng!, destination: _routeDestination!);
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -483,7 +531,17 @@ class AppProvider extends ChangeNotifier {
     }
 
     source.sort((a, b) => (a.distance ?? 0).compareTo(b.distance ?? 0));
-    _nearestFaskes = source;
+    
+    // Filter by logic: only consider it "nearest" if it is within 15 km radius
+    final radiusLimited = source.where((f) => (f.distance ?? double.infinity) <= 15.0).toList();
+
+    if (radiusLimited.isEmpty && source.isNotEmpty) {
+      // If literally nothing is within 15 km, just show the absolute closest 1
+      _nearestFaskes = [source.first];
+    } else {
+      // Limit to top 15 to prevent lag in nearest screen and bottom sheet
+      _nearestFaskes = radiusLimited.take(15).toList();
+    }
     notifyListeners();
   }
 
@@ -518,16 +576,24 @@ class AppProvider extends ChangeNotifier {
     _routeDestination = null;
     notifyListeners();
 
-    try {
-      String profile = 'routed-bike';
-      if (_transportMode == 'mobil') profile = 'routed-car';
-      if (_transportMode == 'jalan_kaki') profile = 'routed-foot';
+    if (!_hasInternet) {
+      _isLoadingRoute = false;
+      notifyListeners();
+      return false;
+    }
 
-      final url =
-          'https://routing.openstreetmap.de/$profile/route/v1/driving/'
-          '${origin.longitude},${origin.latitude};'
-          '${destination.longitude},${destination.latitude}'
-          '?overview=full&geometries=geojson&alternatives=true&steps=true';
+    try {
+      String profile = 'routed-bike'; // Default to bike profile for both Motor and Jalan Kaki (more accurate in local areas)
+      String osrmMode = 'driving'; 
+      
+      if (_transportMode == 'mobil') {
+        profile = 'routed-car';
+      }
+      
+      final url = 'https://routing.openstreetmap.de/$profile/route/v1/$osrmMode/'
+            '${origin.longitude},${origin.latitude};'
+            '${destination.longitude},${destination.latitude}'
+            '?overview=full&geometries=geojson&alternatives=true&steps=true';
 
       final response = await http
           .get(Uri.parse(url))
@@ -537,7 +603,6 @@ class AppProvider extends ChangeNotifier {
         final data = json.decode(response.body) as Map<String, dynamic>;
         final routes = data['routes'] as List<dynamic>;
         if (routes.isNotEmpty) {
-          // Parse all routes
           final List<RouteData> options = [];
           for (var route in routes) {
             final geometry = route['geometry'] as Map<String, dynamic>;
@@ -549,18 +614,15 @@ class AppProvider extends ChangeNotifier {
             
             final distance = (route['distance'] as num).toDouble();
             final distanceKm = distance / 1000.0;
-            final duration = (route['duration'] as num).toDouble(); // seconds
-
-            double realisticDurationMinutes = duration / 60.0;
+            double realisticDurationMinutes = 0;
             if (_transportMode == 'motor') {
-              realisticDurationMinutes = distanceKm * 2.5; // ~24 km/h
+              realisticDurationMinutes = distanceKm * 1.7; 
             } else if (_transportMode == 'mobil') {
-              realisticDurationMinutes = distanceKm * 3.0; // ~20 km/h (macet/lambat)
+              realisticDurationMinutes = distanceKm * 3.0; 
             } else if (_transportMode == 'jalan_kaki') {
-              realisticDurationMinutes = duration / 60.0; // OSRM foot duration
+              realisticDurationMinutes = distanceKm * 12.0; 
             }
             
-            // Parse Turn-by-Turn Instructions
             final List<RouteInstruction> instructions = [];
             final legs = route['legs'] as List<dynamic>?;
             if (legs != null && legs.isNotEmpty) {
@@ -611,26 +673,9 @@ class AppProvider extends ChangeNotifier {
           notifyListeners();
           return true;
         }
-      } else {
-        throw Exception('Gagal mendapatkan rute dari OSRM: ${response.statusCode}');
       }
     } catch (_) {
-      // fallback: garis lurus
-      final distKm = Haversine.distanceKm(
-        lat1: origin.latitude,
-        lon1: origin.longitude,
-        lat2: destination.latitude,
-        lon2: destination.longitude,
-      );
-      _allRouteOptions = [
-        RouteData(
-          points: [origin, destination],
-          distanceKm: distKm,
-          durationMinutes: distKm * 2, // rough estimate
-        )
-      ];
-      _selectedRouteIndex = 0;
-      _routeDestination = destination;
+      // Request failed, no fallback straight line
     }
 
     _isLoadingRoute = false;

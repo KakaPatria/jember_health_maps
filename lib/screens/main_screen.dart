@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
@@ -16,23 +17,125 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Widget> _screens = [
-    const DashboardScreen(),
-    const MapsScreen(),
-    const FaskesListScreen(),
-    const NearestFaskesScreen(),
-    const ProfileScreen(),
+  final List<Widget> _screens = const [
+    DashboardScreen(),
+    MapsScreen(),
+    FaskesListScreen(),
+    NearestFaskesScreen(),
+    ProfileScreen(),
   ];
+
+  bool _wasOffline = false;
+  bool _showOnlineBanner = false;
+  Timer? _bannerTimer;
+
+  @override
+  void dispose() {
+    _bannerTimer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppProvider>(context);
 
+    // Deteksi jika internet baru saja menyala (transisi dari offline ke online)
+    if (_wasOffline && provider.hasInternet) {
+      // Tunggu frame selesai baru set state banner hijau
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        setState(() {
+          _showOnlineBanner = true;
+        });
+        _bannerTimer?.cancel();
+        _bannerTimer = Timer(const Duration(seconds: 3), () {
+          if (mounted) {
+            setState(() {
+              _showOnlineBanner = false;
+            });
+          }
+        });
+      });
+    }
+    _wasOffline = !provider.hasInternet;
+
     return Scaffold(
-      body: IndexedStack(
-        index: provider.mainTabIndex,
-        children: _screens,
+      body: Stack(
+        children: [
+          IndexedStack(
+            index: provider.mainTabIndex,
+            children: _screens,
+          ),
+          
+          // Banner Offline (Merah)
+          if (!provider.hasInternet)
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 10,
+              left: 16,
+              right: 16,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.red.shade600.withValues(alpha: 0.95),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4)),
+                  ],
+                ),
+                child: Row(
+                  children: const [
+                    Icon(Icons.wifi_off_rounded, color: Colors.white, size: 20),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        'Tidak ada koneksi internet. Peta & rute mungkin gagal dimuat.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          // Banner Online Restored (Hijau)
+          else if (_showOnlineBanner)
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 10,
+              left: 16,
+              right: 16,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade600.withValues(alpha: 0.95),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4)),
+                  ],
+                ),
+                child: Row(
+                  children: const [
+                    Icon(Icons.wifi_rounded, color: Colors.white, size: 20),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        'Koneksi internet kembali terhubung!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
       ),
+
       bottomNavigationBar: NavigationBar(
         selectedIndex: provider.mainTabIndex,
         onDestinationSelected: (index) {

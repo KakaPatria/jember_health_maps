@@ -120,12 +120,24 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
               const SizedBox(height: 48),
-              const SizedBox(
-                width: 36,
-                height: 36,
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 3,
+              SizedBox(
+                width: 160,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: LinearProgressIndicator(
+                    color: Colors.white,
+                    backgroundColor: Colors.white.withAlpha(50),
+                    minHeight: 6,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Memuat Data...',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: Colors.white.withAlpha(200),
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.5,
                 ),
               ),
             ],

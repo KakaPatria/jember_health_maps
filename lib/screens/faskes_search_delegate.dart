@@ -99,13 +99,24 @@ class FaskesSearchDelegate extends SearchDelegate<Faskes?> {
   }
 
   Widget _buildSearchResults() {
-    final q = query.toLowerCase();
+    String q = query.toLowerCase();
+    
+    // Translate abbreviations for better search results
+    q = q.replaceAll(RegExp(r'\bpkm\b'), 'puskesmas');
+    q = q.replaceAll(RegExp(r'\brs\b'), 'rumah sakit');
+    q = q.replaceAll(RegExp(r'\blab\b'), 'laboratorium');
+
     final results = provider.allFaskes.where((f) {
       return f.nama.toLowerCase().contains(q) ||
              f.jenis.toLowerCase().contains(q) ||
              f.alamat.toLowerCase().contains(q) ||
              f.alamatLengkap.toLowerCase().contains(q);
     }).toList();
+
+    // Sort search results by distance if location is available
+    if (provider.userLatLng != null) {
+      results.sort((a, b) => (a.distance ?? double.infinity).compareTo(b.distance ?? double.infinity));
+    }
 
     if (results.isEmpty) {
       return Center(

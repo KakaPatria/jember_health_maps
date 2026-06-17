@@ -95,8 +95,7 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                 children: [
                   TileLayer(
                     urlTemplate:
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    subdomains: const ['a', 'b', 'c'],
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                     userAgentPackageName: 'com.example.jember_health_maps',
                   ),
                   MarkerLayer(
@@ -212,11 +211,25 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                             Icon(Icons.near_me,
                                 color: colors.onTertiaryContainer),
                             const SizedBox(width: 12),
-                            Text(
-                              '${Haversine.formatDistance(distance)} dari lokasi Anda',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: colors.onTertiaryContainer,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${Haversine.formatDistance(distance)} (Jarak Tarik Lurus)',
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: colors.onTertiaryContainer,
+                                    ),
+                                  ),
+                                  Text(
+                                    '* Jarak rute kendaraan di peta akan sedikit lebih jauh',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: colors.onTertiaryContainer.withValues(alpha: 0.7),
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -229,7 +242,7 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                   _InfoItem(
                     icon: Icons.location_on_outlined,
                     label: 'Alamat',
-                    value: faskes.alamatLengkap.replaceAll('', '').replaceAll('\n', ' ').trim(),
+                    value: faskes.alamatLengkap.replaceAll('\n', ' ').trim(),
                   ),
                   _InfoItem(
                     icon: Icons.map_outlined,
