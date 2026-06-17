@@ -195,47 +195,41 @@ class AppProvider extends ChangeNotifier {
   }
 
   /// Compute compass heading from accelerometer + magnetometer.
-  /// Equivalent to Android's SensorManager.getRotationMatrix() + getOrientation().
   double? _computeHeading(
     double ax, double ay, double az,
     double mx, double my, double mz,
   ) {
-    // Check if gravity is valid (not in free-fall)
-    double normSqA = ax * ax + ay * ay + az * az;
-    if (normSqA < 1.0) return null;
+    // Normalize accelerometer (A)
+    double normA = sqrt(ax * ax + ay * ay + az * az);
+    if (normA < 1.0) return null;
+    ax /= normA; ay /= normA; az /= normA;
 
-    // H = M × A (East direction in device coordinates)
-    double hx = my * az - mz * ay;
-    double hy = mz * ax - mx * az;
-    double hz = mx * ay - my * ax;
+    // Normalize magnetometer (M)
+    double normM = sqrt(mx * mx + my * my + mz * mz);
+    if (normM < 1.0) return null;
+    mx /= normM; my /= normM; mz /= normM;
 
-    double normSqH = hx * hx + hy * hy + hz * hz;
-    if (normSqH < 0.01) return null; // magnetic field too weak
+    // East vector E = M x A
+    double ex = my * az - mz * ay;
+    double ey = mz * ax - mx * az;
+    double ez = mx * ay - my * ax;
 
-    double invH = 1.0 / sqrt(normSqH);
-    hx *= invH; hy *= invH; hz *= invH;
+    double normE = sqrt(ex * ex + ey * ey + ez * ez);
+    if (normE < 0.1) return null; // M and A are parallel (freefall or error)
+    ex /= normE; ey /= normE; ez /= normE;
 
-    double invA = 1.0 / sqrt(normSqA);
-    ax *= invA; ay *= invA; az *= invA;
+    // North vector N = A x E
+    double ny = az * ex - ax * ez;
+    double nz = ax * ey - ay * ex;
 
-    // M = A × H (North direction in device coordinates)
-    double mx2 = ay * hz - az * hy;
-    double mz2 = ax * hy - ay * hx;
-
-    // Determine azimuth based on phone orientation.
-    // When phone is flat: Y-axis is "forward", use atan2(hy, my2)
-    // When phone is upright: Z-axis is "forward", use atan2(-hz, -mz2)
-    // Blend based on gravity distribution.
-    double absAy = ay.abs();
-    double absAz = az.abs();
-
+    // Determine heading based on how the phone is held.
+    // If flat (|az| > |ay|), the Y-axis points forward.
+    // If upright (|ay| > |az|), the -Z-axis (back camera) points forward.
     double azimuthRad;
-    if (absAz > absAy) {
-      // Phone is more flat (typical: laying on table, or tilted looking at screen)
-      azimuthRad = atan2(hx, mx2);
+    if (az.abs() > ay.abs()) {
+      azimuthRad = atan2(ey, ny);
     } else {
-      // Phone is more upright (portrait, held in hand)
-      azimuthRad = atan2(-hz, -mz2);
+      azimuthRad = atan2(-ez, -nz);
     }
 
     double azimuthDeg = azimuthRad * (180.0 / pi);
