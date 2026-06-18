@@ -25,25 +25,26 @@ class _MainScreenState extends State<MainScreen> {
     ProfileScreen(),
   ];
 
-  bool _wasOffline = false;
   bool _showOnlineBanner = false;
   Timer? _bannerTimer;
+  late AppProvider _provider;
+  bool _lastInternetState = true;
 
   @override
-  void dispose() {
-    _bannerTimer?.cancel();
-    super.dispose();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _provider = Provider.of<AppProvider>(context, listen: false);
+      _lastInternetState = _provider.hasInternet;
+      _provider.addListener(_onProviderChange);
+    });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<AppProvider>(context);
-
-    // Deteksi jika internet baru saja menyala (transisi dari offline ke online)
-    if (_wasOffline && provider.hasInternet) {
-      // Tunggu frame selesai baru set state banner hijau
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted) return;
+  void _onProviderChange() {
+    final hasInternet = _provider.hasInternet;
+    if (!_lastInternetState && hasInternet) {
+      // Transisi dari offline ke online
+      if (mounted) {
         setState(() {
           _showOnlineBanner = true;
         });
@@ -55,9 +56,28 @@ class _MainScreenState extends State<MainScreen> {
             });
           }
         });
-      });
+      }
+    } else if (_lastInternetState && !hasInternet) {
+      // Transisi dari online ke offline, matikan banner hijau jika sedang tayang
+      if (mounted && _showOnlineBanner) {
+        setState(() {
+          _showOnlineBanner = false;
+        });
+      }
     }
-    _wasOffline = !provider.hasInternet;
+    _lastInternetState = hasInternet;
+  }
+
+  @override
+  void dispose() {
+    _provider.removeListener(_onProviderChange);
+    _bannerTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       body: Stack(

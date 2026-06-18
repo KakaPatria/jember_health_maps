@@ -528,6 +528,7 @@ class AppProvider extends ChangeNotifier {
         lat2: f.latitude,
         lon2: f.longitude,
       );
+      f.isRouteDistance = false;
     }
 
     source.sort((a, b) => (a.distance ?? 0).compareTo(b.distance ?? 0));
@@ -543,6 +544,43 @@ class AppProvider extends ChangeNotifier {
       _nearestFaskes = radiusLimited.take(15).toList();
     }
     notifyListeners();
+
+    // Fire and forget: fetch real route distances for these top candidates
+    _fetchRealDistancesForNearest();
+  }
+
+  Future<void> _fetchRealDistancesForNearest() async {
+    if (_nearestFaskes.isEmpty || !_hasInternet || _userPosition == null) return;
+
+    final origin = '${_userPosition!.longitude},${_userPosition!.latitude}';
+    final destinations = _nearestFaskes.map((f) => '${f.longitude},${f.latitude}').join(';');
+    
+    // We use routed-bike as general optimal routing profile for short distances (especially in Indonesia)
+    final url = 'https://routing.openstreetmap.de/routed-bike/table/v1/driving/$origin;$destinations?sources=0&annotations=distance';
+
+    try {
+      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['code'] == 'Ok' && data['distances'] != null && data['distances'].isNotEmpty) {
+          final distances = data['distances'][0] as List;
+          // distances[0] is distance from origin to origin (0)
+          // distances[i+1] is distance from origin to destination i
+          for (int i = 0; i < _nearestFaskes.length; i++) {
+            if (i + 1 < distances.length && distances[i + 1] != null) {
+              final double distMeters = (distances[i + 1] as num).toDouble();
+              _nearestFaskes[i].distance = distMeters / 1000.0;
+              _nearestFaskes[i].isRouteDistance = true;
+            }
+          }
+          // Re-sort based on real route distance
+          _nearestFaskes.sort((a, b) => (a.distance ?? 0).compareTo(b.distance ?? 0));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      debugPrint('Failed to fetch table distances: $e');
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────────────

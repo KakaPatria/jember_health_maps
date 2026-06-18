@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/app_provider.dart';
 import 'login_screen.dart';
 import 'main_screen.dart';
@@ -48,15 +47,15 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (!mounted) return;
 
-    // Check if user is logged in via SharedPreferences
-    final prefs = await SharedPreferences.getInstance();
-    final isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+    if (!mounted) return;
+    
+    // Check if user is logged in via memory-based session
+    await provider.loadCurrentUser();
+    final isLoggedIn = provider.currentUser != null;
 
     if (!mounted) return;
 
     if (isLoggedIn) {
-      await provider.loadCurrentUser();
-      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const MainScreen()),
       );

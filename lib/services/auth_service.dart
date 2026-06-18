@@ -1,10 +1,9 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import '../database/database_helper.dart';
 import '../models/user.dart';
 
 class AuthService {
-  static const String _keyIsLoggedIn = 'is_logged_in';
-  static const String _keyUserId = 'user_id';
+  // Use memory variable instead of SharedPreferences so session expires when app closes
+  static int? _currentUserId;
 
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 
@@ -45,10 +44,8 @@ class AuthService {
         return {'success': false, 'message': 'Email atau password salah'};
       }
 
-      // Save session
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_keyIsLoggedIn, true);
-      await prefs.setInt(_keyUserId, user.id!);
+      // Save session in memory only (will expire when app closes)
+      _currentUserId = user.id;
 
       return {'success': true, 'message': 'Login berhasil', 'user': user};
     } catch (e) {
@@ -57,21 +54,16 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_keyIsLoggedIn);
-    await prefs.remove(_keyUserId);
+    _currentUserId = null;
   }
 
   Future<bool> isLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_keyIsLoggedIn) ?? false;
+    return _currentUserId != null;
   }
 
   Future<User?> getCurrentUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getInt(_keyUserId);
-    if (userId == null) return null;
-    return await _dbHelper.getUserById(userId);
+    if (_currentUserId == null) return null;
+    return await _dbHelper.getUserById(_currentUserId!);
   }
 
   Future<Map<String, dynamic>> updateProfile({

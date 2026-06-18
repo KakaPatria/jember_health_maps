@@ -9,6 +9,7 @@ class Faskes {
   final double latitude;
   final double longitude;
   double? distance; // Distance from user in km, computed at runtime
+  bool isRouteDistance; // True if distance is the real route distance from OSRM table
 
   Faskes({
     this.id,
@@ -21,6 +22,7 @@ class Faskes {
     required this.latitude,
     required this.longitude,
     this.distance,
+    this.isRouteDistance = false,
   });
 
   Map<String, dynamic> toMap() {

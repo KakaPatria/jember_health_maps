@@ -216,14 +216,14 @@ class _FaskesDetailScreenState extends State<FaskesDetailScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${Haversine.formatDistance(distance)} (Jarak Tarik Lurus)',
+                                    '${Haversine.formatDistance(distance)} dari lokasi Anda',
                                     style: theme.textTheme.bodyMedium?.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: colors.onTertiaryContainer,
                                     ),
                                   ),
                                   Text(
-                                    '* Jarak rute kendaraan di peta akan sedikit lebih jauh',
+                                    '* Jarak sesungguhnya lewat jalan raya bisa berbeda',
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: colors.onTertiaryContainer.withValues(alpha: 0.7),
                                       fontSize: 11,

@@ -529,8 +529,8 @@ class _MapsScreenState extends State<MapsScreen> {
                                     const SizedBox(height: 2),
                                     Text(
                                       provider.routeDurationMinutes > 0
-                                          ? 'Estimasi: ${provider.routeDurationMinutes.ceil()} menit'
-                                          : 'Estimasi: ${Haversine.estimasiWaktu(provider.routeDistanceKm)}',
+                                          ? 'Waktu tempuh ~ ${provider.routeDurationMinutes.ceil()} menit'
+                                          : 'Waktu tempuh ~ ${Haversine.estimasiWaktu(provider.routeDistanceKm)}',
                                       style: theme.textTheme.bodyMedium?.copyWith(
                                         color: Colors.green.shade700,
                                         fontWeight: FontWeight.w700,

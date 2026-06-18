@@ -114,11 +114,14 @@ class FaskesCard extends StatelessWidget {
                                 size: 14,
                                 color: theme.colorScheme.primary),
                             const SizedBox(width: 4),
-                            Text(
-                              '${Haversine.formatDistance(distance!)} (Lurus)',
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                color: theme.colorScheme.primary,
-                                fontWeight: FontWeight.w700,
+                            Flexible(
+                              child: Text(
+                                '${Haversine.formatDistance(distance!)}${faskes.isRouteDistance ? '' : ' (Perkiraan)'}',
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
